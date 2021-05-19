@@ -14,6 +14,7 @@ class Home extends Component {
         <Landing />
         <InfoIcons />
         <TheSafeToken />
+        <div className="w-full h-96 dark:bg-gray-900">TEST</div>
       </div>
     );
   }
