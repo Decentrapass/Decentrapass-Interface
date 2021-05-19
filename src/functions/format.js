@@ -18,9 +18,8 @@ export async function formatData(numItems, contract, acc) {
 
     let type = itemData[0];
     let receivedData = itemData[1].split(",");
-    let displayed = itemData[2];
 
-    if (displayed) {
+    if (receivedData != "") {
       let data = {
         numId: count++,
         id: i,
@@ -62,4 +61,12 @@ export function formatSend(data) {
     str += item + ",";
   }
   return str.substring(0, str.length - 1);
+}
+
+export function formatAccount(acc) {
+  acc = acc || "";
+  let shortAcc =
+    acc.substring(0, 6) + "..." + acc.substring(acc.length - 4, acc.length);
+
+  return shortAcc;
 }

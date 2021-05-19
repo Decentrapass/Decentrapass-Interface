@@ -9,6 +9,7 @@ import {
   SAVE_WEB3,
   SAVE_CONTRACT,
   LOGIN,
+  SAVE_TX,
 } from "./constants";
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
   contract: null, // Saves the contract access point,
   account: "", // Saves the users address
   password: "", // Saves the users cyphered password
+  pendingTxs: [],
   loggedIn: false, // Saves if the user has typed a password
 };
 
@@ -76,6 +78,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         loggedIn: action.payload,
+      };
+    case SAVE_TX:
+      return {
+        ...state,
+        pendingTxs: [...state.pendingTxs, action.payload],
       };
     default:
       return state;

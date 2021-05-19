@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { FaUnlock } from "react-icons/fa";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { hash } from "../../../functions/encryption";
 import { changePage, saveLogin } from "../../../state/actions";
+
+import LogoNBG from "../../../img/logo-nobg.png";
 
 const mapStateToProps = (state) => {
   return {
@@ -31,13 +32,15 @@ export class Register extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async componentDidMount() {
-    let pass = await this.props.contract.methods
-      .password(this.props.account)
-      .call();
+  async componentDidUpdate() {
+    if (this.props.contract) {
+      let pass = await this.props.contract.methods
+        .password(this.props.account)
+        .call();
 
-    if (pass && pass !== "") {
-      this.setState({ redirect: <Redirect to="/app/login" /> });
+      if (pass && pass !== "") {
+        this.setState({ redirect: <Redirect to="/app/login" /> });
+      }
     }
   }
 
@@ -58,7 +61,7 @@ export class Register extends Component {
       <>
         {this.state.redirect}
         <div className="flex flex-col items-center justify-center w-full h-full">
-          <form className="flex form w-1/2" onSubmit={this.handleSubmit}>
+          <form className="flex form w-1/2 h-16 " onSubmit={this.handleSubmit}>
             <input
               id="unlock-input"
               type="password"
@@ -73,7 +76,7 @@ export class Register extends Component {
               type="submit"
               className="bg-blue-500 border-blue-500 py-3 px-4 rounded-tr-xl"
             >
-              <FaUnlock />
+              <img src={LogoNBG} className="h-full" />
             </button>
           </form>
         </div>

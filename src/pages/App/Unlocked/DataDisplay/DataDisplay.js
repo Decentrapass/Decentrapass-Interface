@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import { DATA_DISPLAY, LOGO_COLORS, SHOW_DATA } from "../Constants/constants";
+import {
+  DATA_DISPLAY,
+  LOGO_COLORS,
+  SHOW_DATA,
+} from "../../../../components/Constants/constants";
 
 import NormalField from "./NormalField";
 import HiddenField from "./HiddenField";
@@ -12,7 +16,7 @@ import {
   changePage,
   filterItems,
   saveItems,
-} from "../../state/actions";
+} from "../../../../state/actions";
 import { Redirect } from "react-router";
 
 const mapStateToProps = (state) => {
@@ -49,11 +53,9 @@ class DataDisplay extends Component {
   }
 
   async deleteHandler() {
-    let call = await this.props.contract.methods
+    this.props.contract.methods
       .deleteObject(this.props.currentItem.id)
       .send({ from: this.props.account });
-
-    console.log(call);
 
     let newItems = this.props.items;
     let delPos;
@@ -61,6 +63,8 @@ class DataDisplay extends Component {
     for (let i = 0; i < this.props.items.length; i++)
       if (this.props.items[i].numId === this.props.currentItem.numId)
         delPos = i;
+
+    console.log(delPos);
 
     newItems.splice(delPos, 1);
     this.props.saveItems(newItems);

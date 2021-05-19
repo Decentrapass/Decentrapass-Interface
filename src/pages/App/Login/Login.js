@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { FaUnlock } from "react-icons/fa";
 import { connect } from "react-redux";
+
+import LogoNBG from "../../../img/logo-nobg.png";
 
 import { Redirect, withRouter } from "react-router-dom";
 
 import { decrypt, hash } from "../../../functions/encryption";
+
 import { formatData } from "../../../functions/format";
 import {
   saveItems,
@@ -44,7 +46,7 @@ export class Login extends Component {
   };
 
   async componentDidUpdate(prevProps, prevState) {
-    if (prevProps.web3 !== this.props.web3 && this.props.contract) {
+    if (this.props.contract) {
       let pass = await this.props.contract.methods
         .password(this.props.account)
         .call();
@@ -106,7 +108,6 @@ export class Login extends Component {
       this.setState({ redirect: <Redirect to="/app/unlocked" /> });
 
       var current = new Date().toLocaleString();
-      console.log(current);
 
       localStorage.setItem("localSession", pass + "-" + current);
     } else {
@@ -120,7 +121,7 @@ export class Login extends Component {
       <>
         {this.state.redirect}
         <div className="flex flex-col items-center justify-center w-full h-full">
-          <form className="flex form w-1/2" onSubmit={this.handleSubmit}>
+          <form className="flex form w-1/2 h-16" onSubmit={this.handleSubmit}>
             <input
               id="unlock-input"
               type="password"
@@ -133,9 +134,9 @@ export class Login extends Component {
             />
             <button
               type="submit"
-              className="bg-green-500 border-green-500 py-3 px-4 rounded-tr-xl focus:outline-none"
+              className="bg-green-500 border-green-500 py-3 px-4 rounded-tr-xl focus:outline-none flex items-center justify-center h-full"
             >
-              <FaUnlock />
+              <img src={LogoNBG} className="h-full" />
             </button>
           </form>
           {this.state.wrongPass && (

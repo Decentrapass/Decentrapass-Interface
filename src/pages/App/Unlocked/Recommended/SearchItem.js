@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { changeItem } from "../../state/actions";
-import { LOGO_COLORS } from "../Constants/constants";
+import { changeItem } from "../../../../state/actions";
+import { LOGO_COLORS } from "../../../../components/Constants/constants";
 
 const mapDispatchToProps = (dispatch) => {
   return {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import AddDataField from "../../../components/DataCreate/AddDataField";
+import AddDataField from "../AddItem/DataCreate/AddDataField";
 import { IF } from "../../../components/Constants/AddInterfaces";
 import { encrypt } from "../../../functions/encryption";
 import { changeItem, changePage, saveItems } from "../../../state/actions";

@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import AddDataField from "../../../components/DataCreate/AddDataField";
+import AddDataField from "./DataCreate/AddDataField";
 import { IF } from "../../../components/Constants/AddInterfaces";
 import { encrypt } from "../../../functions/encryption";
-import { changeItem, changePage, saveItems } from "../../../state/actions";
+import {
+  changeItem,
+  changePage,
+  saveItems,
+  saveTx,
+} from "../../../state/actions";
 import { TYPES_INT } from "../../../components/Constants/constants";
 import { formatItem, formatSend } from "../../../functions/format";
 import { Redirect } from "react-router-dom";
@@ -23,6 +28,7 @@ const mapDispatchToProps = (dispatch) => {
     changePage: (page) => dispatch(changePage(page)),
     changeItem: (item) => dispatch(changeItem(item)),
     saveItems: (data) => dispatch(saveItems(data)),
+    saveTx: (data) => dispatch(saveTx(data)),
   };
 };
 
@@ -65,11 +71,17 @@ class AddItem extends Component {
     this.props.changeItem(newItem);
 
     let toSend = formatSend(encrypt(data, this.props.password));
-    console.log(toSend);
 
     this.props.contract.methods
-      .saveObject(type, toSend)
-      .send({ from: this.props.account });
+      .saveObject(type, nextId, toSend)
+      .send({ from: this.props.account })
+      .on(
+        "transactionHash",
+        function (hash) {
+          this.props.saveTx(hash);
+        }.bind(this)
+      );
+
     this.setState({ redirect: <Redirect to="/app/unlocked" /> });
   }
 

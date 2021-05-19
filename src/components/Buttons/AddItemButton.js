@@ -46,11 +46,11 @@ class AddItemButton extends Component {
     return (
       <div
         className="h-full flex items-center justify-center ml-5 relative"
-        onFocus={() => this.setState({ open: true })}
-        onBlur={() => this.setState({ open: false })}
+        onMouseEnter={() => this.setState({ open: true })}
+        onMouseLeave={() => this.setState({ open: false })}
       >
         {this.state.redirect}
-        <button className="hover:bg-gray-300 dark:hover:bg-gray-800 border-2 bg-gray-200 dark:bg-gray-700 border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-600 dark:text-white text-3xl focus:outline-none w-full h-full rounded-xl rounded-br-none">
+        <button className="rounded-xl hover:bg-gray-300 dark:hover:bg-gray-800 border-2 bg-gray-200 dark:bg-gray-700 border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-600 dark:text-gray-500 text-3xl focus:outline-none w-full h-full">
           <IoMdAdd />
         </button>
         <div

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import InfoIcons from "./InfoIcons";
+import Landing from "./Landing";
 
 class Home extends Component {
   constructor(props) {
@@ -7,8 +9,9 @@ class Home extends Component {
   }
   render() {
     return (
-      <div className="flex justify-center items-center flex-col">
-        <p>TEST</p>
+      <div className="h-full" id="home">
+        <Landing />
+        <InfoIcons />
       </div>
     );
   }

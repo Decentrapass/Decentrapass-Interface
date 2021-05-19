@@ -49,7 +49,7 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="w-full relative border-2 border-gray-300 dark:border-gray-600 border-solid rounded-xl rounded-tl-none overflow-hidden">
+      <div className="w-full relative border-2 border-gray-300 dark:border-gray-600 border-solid rounded-xl overflow-hidden">
         <input
           type="text"
           name="search"

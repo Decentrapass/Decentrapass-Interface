@@ -9,6 +9,7 @@ import {
   SAVE_PASS,
   LOGIN,
   SAVE_CONTRACT,
+  SAVE_TX,
 } from "./constants";
 
 // Action to save received items from backend
@@ -54,6 +55,11 @@ export const saveContract = (payload) => {
 // Action to save user cyphered password
 export const savePassword = (payload) => {
   return { type: SAVE_PASS, payload };
+};
+
+// Action to save transaction
+export const saveTx = (payload) => {
+  return { type: SAVE_TX, payload };
 };
 
 // Action to save user is logged in

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { SHOW_SEARCH } from "../Constants/constants";
+import { SHOW_SEARCH } from "../../../../components/Constants/constants";
 import SearchItem from "./SearchItem";
 
 const mapStateToProps = (state) => {

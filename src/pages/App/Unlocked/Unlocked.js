@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import AddItemButton from "../../../components/Buttons/AddItemButton";
-import DataDisplay from "../../../components/DataDisplay/DataDisplay";
-import Recommended from "../../../components/Recommended/Recommended";
+import DataDisplay from "./DataDisplay/DataDisplay";
+import Recommended from "./Recommended/Recommended";
 import SearchBar from "../../../components/Search/SearchBar";
 
 const mapStateToProps = (state) => {

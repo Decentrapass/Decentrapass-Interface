@@ -1,4 +1,4 @@
-export const TOKEN_ADDRESS = "0x597745867e23a1b4D2328498681ee17c96Ff4A3f";
+export const TOKEN_ADDRESS = "0x6d99e6708b54a08dC9f7344C1f63E6629F90778c";
 
 export const TOKEN_ABI = [
   {
@@ -37,6 +37,11 @@ export const TOKEN_ABI = [
       {
         internalType: "uint256",
         name: "_objectType",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_id",
         type: "uint256",
       },
       {
@@ -106,11 +111,6 @@ export const TOKEN_ABI = [
         internalType: "string",
         name: "data",
         type: "string",
-      },
-      {
-        internalType: "bool",
-        name: "displayed",
-        type: "bool",
       },
     ],
     stateMutability: "view",
