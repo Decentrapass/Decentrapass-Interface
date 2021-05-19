@@ -12,8 +12,8 @@ export default class TheSafeToken extends Component {
   render() {
     return (
       <div className="w-full flex items-center justify-center text-gray-200 py-16 bg-green-1000 dark:bg-gray-800">
-        <div className="w-3/5 flex flex-col items-center justify-center font-sans">
-          <h2 className="text-5xl font-black w-3/4   text-center mb-3">
+        <div className="w-4/5 2xl:w-3/5 flex flex-col items-center justify-center font-sans">
+          <h2 className="text-5xl font-black w-3/4 text-center mb-3">
             The future of Decentrapass
           </h2>
           <h3 className="text-xl w-2/3 text-center">

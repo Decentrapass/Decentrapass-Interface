@@ -93,10 +93,12 @@ class EditItem extends Component {
     return (
       <>
         {this.state.redirect}
-        <div className="flex flex-col relative bg-green-50 dark:bg-gray-900 w-full h-full">
-          <div className="flex flex-col justify-center items-center cursor-pointer w-full h-full">
-            {this.state.fields}
-            <div className="flex w-1/3 justify-between dark:text-white">
+        <div className="flex flex-col relative bg-green-50 dark:bg-gray-900 w-full h-full justify-end items-center pb-24">
+          <div className="flex flex-col justify-start items-center cursor-pointer w-2/3 h-5/6">
+            <div className="overflow-y-auto w-full mb-10 border border-solid border-gray-400 dark:border-gray-200 p-8 rounded-xl">
+              {this.state.fields}
+            </div>
+            <div className="flex w-full justify-between dark:text-white">
               <button
                 className="bg-red-300 border-2 border-red-500 dark:border-red-600 dark:bg-red-800 py-2 w-48 hover:bg-red-500 dark:hover:bg-red-600 cursor-pointer text-xl"
                 onClick={() =>

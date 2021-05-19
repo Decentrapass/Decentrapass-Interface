@@ -75,7 +75,7 @@ export default class AddDataField extends Component {
 
   render() {
     return (
-      <div className="flex flex-col w-1/3 mb-5">
+      <div className="flex flex-col w-full mb-5">
         <span className="dark:text-white text-xl mb-1">
           {this.props.fieldName}
         </span>
