@@ -46,7 +46,7 @@ export default class Footer extends Component {
               href="https://twitter.com/decentrapass"
               target="_blank"
               rel="noreferrer"
-              className="w-12 h-12 text-2xl mr-1 flex items-center justify-center rounded-full border border-solid border-gray-400 hover:border-gray-100 text-gray-400 hover:text-gray-100"
+              className="transition-colors w-12 h-12 text-2xl mr-1 flex items-center justify-center rounded-full border border-solid border-gray-400 hover:border-gray-100 text-gray-400 hover:text-gray-100"
             >
               <FaTwitter />
             </a>
@@ -54,7 +54,7 @@ export default class Footer extends Component {
               href="https://www.reddit.com/r/Decentrapass/"
               target="_blank"
               rel="noreferrer"
-              className="w-12 h-12 text-2xl mx-1 flex items-center justify-center rounded-full border border-solid border-gray-400 hover:border-gray-100 text-gray-400 hover:text-gray-100"
+              className="transition-colors w-12 h-12 text-2xl mx-1 flex items-center justify-center rounded-full border border-solid border-gray-400 hover:border-gray-100 text-gray-400 hover:text-gray-100"
             >
               <FaRedditAlien />
             </a>
@@ -62,7 +62,7 @@ export default class Footer extends Component {
               href="mailto:decentrapass@pm.me"
               target="_blank"
               rel="noreferrer"
-              className="w-12 h-12 text-2xl mx-1 flex items-center justify-center rounded-full border border-solid border-gray-400 hover:border-gray-100 text-gray-400 hover:text-gray-100"
+              className="transition-colors w-12 h-12 text-2xl mx-1 flex items-center justify-center rounded-full border border-solid border-gray-400 hover:border-gray-100 text-gray-400 hover:text-gray-100"
             >
               <IoMail />
             </a>

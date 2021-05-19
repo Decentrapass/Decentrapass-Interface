@@ -2,7 +2,11 @@ module.exports = {
   purge: [],
   darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "green-1000": "#00291d",
+      },
+    },
   },
   variants: {
     extend: {},
