@@ -11,10 +11,16 @@ An open source interface for the Decentrapass project - a project for decentrali
 ## Development
 
 Install dependencies
-`npm install`
+
+```
+npm install
+```
 
 Run
-`npm run start`
+
+```
+npm run start
+```
 
 ## Contributions
 
