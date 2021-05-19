@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import InfoIcons from "./InfoIcons";
 import Landing from "./Landing";
+import TheSafeToken from "./TheSafeToken";
 
 class Home extends Component {
   constructor(props) {
@@ -9,9 +10,10 @@ class Home extends Component {
   }
   render() {
     return (
-      <div className="h-full" id="home">
+      <div className="flex flex-col" id="home">
         <Landing />
         <InfoIcons />
+        <TheSafeToken />
       </div>
     );
   }

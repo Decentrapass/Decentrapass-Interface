@@ -2,7 +2,10 @@ import React from "react";
 
 export default function Landing() {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-5/6 dark:text-gray-200">
+    <div
+      className="flex flex-col items-center justify-center w-full dark:text-gray-200"
+      style={{ height: "80vh" }}
+    >
       <div className="w-1/3 text-center text-7xl uppercase font-black font-sans mb-5">
         <h1>
           <span className="text-green-400">Decentra</span>pass is here

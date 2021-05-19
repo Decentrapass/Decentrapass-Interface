@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import {
@@ -22,7 +22,6 @@ import EditItem from "../pages/App/EditItem/EditItem";
 import Login from "../pages/App/Login/Login";
 import Register from "../pages/App/Register/Register";
 import Unlocked from "../pages/App/Unlocked/Unlocked";
-import { Component } from "react";
 import NoMobile from "../components/AppNav/NoMobile";
 
 const mapStateToProps = (state) => {

@@ -67,10 +67,10 @@ class Nav extends Component {
     return (
       <div
         className={
-          "fixed w-full h-20 flex justify-between items-center px-8 dark:text-gray-200 border-gray-300 web-menu " +
+          "fixed w-full h-20 flex justify-between items-center px-8 dark:text-gray-200 bg-green-50 dark:bg-gray-900 web-menu border-solid border-b-2 " +
           (this.state.scrolled
-            ? "bg-white dark:bg-gray-800 border-solid border-b-2"
-            : "bg-green-50 dark:bg-gray-900 border-0")
+            ? "border-gray-400 dark:border-white"
+            : "border-green-50 dark:border-gray-900")
         }
       >
         <Link to="/" className="flex justify-center items-center h-2/5">
