@@ -98,12 +98,12 @@ class Nav extends Component {
           >
             {this.state.icon}
           </button>
-          <a
+          <Link
             className="mx-5 bg-green-300 dark:bg-green-700 hover:bg-green-400 dark:hover:bg-green-600 py-2 px-3 rounded-full"
-            href="/app/login"
+            to="/app/login"
           >
             Launch Decentrapass
-          </a>
+          </Link>
         </div>
       </div>
     );
