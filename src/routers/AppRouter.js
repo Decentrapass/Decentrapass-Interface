@@ -23,6 +23,7 @@ import Login from "../pages/App/Login/Login";
 import Register from "../pages/App/Register/Register";
 import Unlocked from "../pages/App/Unlocked/Unlocked";
 import { Component } from "react";
+import NoMobile from "../components/AppNav/NoMobile";
 
 const mapStateToProps = (state) => {
   return {
@@ -110,8 +111,9 @@ class AppRouter extends Component {
   render() {
     return (
       <>
+        {window.innerWidth <= 768 && <NoMobile />}
         <AppNav />
-        {this.state.metamaskEnabled === false && (
+        {this.state.metamaskEnabled === false && window.innerWidth > 768 && (
           <ConnectMetamask connMM={this.connectMetamask} />
         )}
         <Switch>

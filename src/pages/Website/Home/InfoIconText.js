@@ -40,5 +40,10 @@ export const ITEM = [
     content:
       "Through our token SAFE we allow all our users to have a voice in deciding future upgrades, changes, and more. ",
   },
-  {},
+  {
+    icon: <FaVoteYea />,
+    title: "User-driven network governance",
+    content:
+      "Through our token SAFE we allow all our users to have a voice in deciding future upgrades, changes, and more. ",
+  },
 ];
