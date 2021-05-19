@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import AddDataField from "../../../components/DataCreate/AddDataField";
 import { IF } from "../../../components/Constants/AddInterfaces";
-import { decrypt, encrypt, hash } from "../../../functions/encryption";
+import { encrypt } from "../../../functions/encryption";
 import { changeItem, changePage, saveItems } from "../../../state/actions";
 import { TYPES_INT } from "../../../components/Constants/constants";
 import { Redirect } from "react-router";
@@ -57,7 +57,7 @@ class EditItem extends Component {
   }
 
   stateChanger(name, val) {
-    if (name == "number") val.replace(/ /g, "");
+    if (name === "number") val.replace(/ /g, "");
     this.setState({ [name]: val }); // Saves input values on state
   }
 

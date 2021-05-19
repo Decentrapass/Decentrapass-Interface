@@ -32,7 +32,7 @@ class AppNav extends Component {
 
   changeTheme() {
     let current = localStorage.getItem("theme");
-    if (current != "light") {
+    if (current !== "light") {
       localStorage.setItem("theme", "light");
     } else {
       localStorage.setItem("theme", "dark");
@@ -45,8 +45,15 @@ class AppNav extends Component {
     }
 
     this.setState({
-      icon: localStorage.theme == "light" ? <FaRegMoon /> : <FiSun />,
+      icon: localStorage.theme === "light" ? <FaRegMoon /> : <FiSun />,
     });
+  }
+
+  async componentDidUpdate(prevProps, prevState) {
+    if (prevProps.web3 !== this.props.web3 && this.props.web3)
+      this.setState({
+        network: await this.props.web3.eth.net.getNetworkType(),
+      });
   }
 
   async componentDidMount() {
@@ -58,13 +65,8 @@ class AppNav extends Component {
     }
 
     this.setState({
-      icon: localStorage.theme == "light" ? <FaRegMoon /> : <FiSun />,
+      icon: localStorage.theme === "light" ? <FaRegMoon /> : <FiSun />,
     });
-
-    // Querying the current metamask network for display
-    let network = await this.props.web3.eth.net.getNetworkType();
-
-    this.setState({ network });
   }
 
   render() {

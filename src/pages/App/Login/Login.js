@@ -43,39 +43,41 @@ export class Login extends Component {
     redirect: null,
   };
 
-  async componentDidMount() {
-    let pass = await this.props.contract.methods
-      .password(this.props.account)
-      .call();
+  async componentDidUpdate(prevProps, prevState) {
+    if (prevProps.web3 !== this.props.web3 && this.props.contract) {
+      let pass = await this.props.contract.methods
+        .password(this.props.account)
+        .call();
 
-    if (!pass || pass === "") {
-      this.setState({ redirect: <Redirect to="/app/register" /> });
-    }
+      if (!pass || pass === "") {
+        this.setState({ redirect: <Redirect to="/app/register" /> });
+      }
 
-    if (localStorage.localSession) {
-      let passLS = localStorage.localSession.split("-")[0];
-      let time = new Date(localStorage.localSession.split("-")[1]);
-      let now = new Date();
+      if (localStorage.localSession) {
+        let passLS = localStorage.localSession.split("-")[0];
+        let time = new Date(localStorage.localSession.split("-")[1]);
+        let now = new Date();
 
-      let diff = (now.getTime() - time.getTime()) / 3600 / 1000;
-      if (diff >= 1 || diff < 0 || passLS != pass) {
-        localStorage.removeItem("localSession");
-      } else {
-        let numItems = await this.props.contract.methods
-          .numObjects(this.props.account)
-          .call();
+        let diff = (now.getTime() - time.getTime()) / 3600 / 1000;
+        if (diff >= 1 || diff < 0 || passLS !== pass) {
+          localStorage.removeItem("localSession");
+        } else {
+          let numItems = await this.props.contract.methods
+            .numObjects(this.props.account)
+            .call();
 
-        let dataToSave = await formatData(
-          numItems,
-          this.props.contract.methods,
-          this.props.account
-        );
+          let dataToSave = await formatData(
+            numItems,
+            this.props.contract.methods,
+            this.props.account
+          );
 
-        dataToSave = decrypt(dataToSave, pass);
-        this.props.saveItems(dataToSave);
-        this.props.changeItem(dataToSave[0]);
-        this.props.saveLogin(true);
-        this.setState({ redirect: <Redirect to="/app/unlocked" /> });
+          dataToSave = decrypt(dataToSave, pass);
+          this.props.saveItems(dataToSave);
+          this.props.changeItem(dataToSave[0]);
+          this.props.saveLogin(true);
+          this.setState({ redirect: <Redirect to="/app/unlocked" /> });
+        }
       }
     }
   }

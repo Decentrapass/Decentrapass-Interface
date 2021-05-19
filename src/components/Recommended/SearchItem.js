@@ -35,7 +35,7 @@ class SearchItem extends Component {
   render() {
     let found = false;
     for (const i of this.props.items)
-      if (i.numId == this.props.itemId) found = true;
+      if (i.numId === this.props.itemId) found = true;
 
     if (!found) return <></>;
 

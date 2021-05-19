@@ -59,7 +59,8 @@ class DataDisplay extends Component {
     let delPos;
 
     for (let i = 0; i < this.props.items.length; i++)
-      if (this.props.items[i].numId == this.props.currentItem.numId) delPos = i;
+      if (this.props.items[i].numId === this.props.currentItem.numId)
+        delPos = i;
 
     newItems.splice(delPos, 1);
     this.props.saveItems(newItems);
@@ -93,6 +94,7 @@ class DataDisplay extends Component {
                         : "http://" + displayItem.url
                     }
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <span className="text-green-500 dark:text-green-600 text-lg hover:underline">
                       {displayItem.url}
@@ -142,6 +144,7 @@ class DataDisplay extends Component {
                           first={0 === key}
                         />
                       );
+                    else return <p>Error:{displayItem.type}</p>;
                   })
                 }
               </div>

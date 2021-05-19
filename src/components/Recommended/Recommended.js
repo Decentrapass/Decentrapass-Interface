@@ -8,10 +8,6 @@ const mapStateToProps = (state) => {
 };
 
 class Recommended extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="w-2/5 border-r-2 border-gray-600 cursor-pointer overflow-y-hidden bg-white dark:bg-gray-900">

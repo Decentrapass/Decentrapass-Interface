@@ -16,10 +16,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleType = (e) => {
     // Filters for searching
     var newItems = this.props.items.filter((el) => {
@@ -41,6 +37,7 @@ class SearchBar extends Component {
           el["note"].toLowerCase().includes(val) ||
           el["title"].toLowerCase().includes(val)
         );
+      else return false;
     });
 
     // If search bar is empty display all

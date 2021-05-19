@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import AddDataField from "../../../components/DataCreate/AddDataField";
 import { IF } from "../../../components/Constants/AddInterfaces";
-import { encrypt, hash } from "../../../functions/encryption";
+import { encrypt } from "../../../functions/encryption";
 import { changeItem, changePage, saveItems } from "../../../state/actions";
 import { TYPES_INT } from "../../../components/Constants/constants";
-import { formatData, formatItem, formatSend } from "../../../functions/format";
+import { formatItem, formatSend } from "../../../functions/format";
 import { Redirect } from "react-router-dom";
 
 const mapStateToProps = (state) => {
@@ -43,7 +43,7 @@ class AddItem extends Component {
   }
 
   componentDidMount() {
-    if (this.props.addingItem == null) {
+    if (this.props.addingItem === null) {
       this.setState({ redirect: <Redirect to="/app/unlocked" /> });
     }
   }
