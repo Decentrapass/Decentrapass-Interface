@@ -1,0 +1,669 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// In-page elements
+.form-button {
+  position: absolute;
+  z-index: 100;
+  border: 0 none;
+  background: url("chrome-extension://nigcdjchfnhiadnkmdfijjhajaljndpc/./img/transparent-logo.png")
+    no-repeat;
+  background-size: 100% 100%;
+}
+
+$primary: rgb(0, 162, 255);
+$primary-light: rgb(219, 238, 255);
+$primary-dark: rgb(138, 0, 180);
+$main-gray: rgb(189, 189, 189);
+$main-blue: rgb(0, 68, 255);
+$text-gray: rgb(34, 34, 34);
+$light-gray: rgba(231, 231, 231, 1);
+$error: rgb(255, 59, 59);
+
+// HELPFUL CLASSES
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  .no-pass-hidden {
+    -webkit-text-security: disc;
+  }
+
+  .no-pass-buttons {
+    display: flex;
+    width: 100%;
+    padding: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+    height: 15%;
+
+    input[type="submit"] {
+      padding: 7px 14px;
+      border-radius: 5px;
+      font-size: 16px;
+      border: 1px solid $main-gray;
+      cursor: pointer;
+      margin: 2%;
+    }
+
+    .normal {
+      background: white;
+      margin-left: 0;
+    }
+
+    .normal:hover {
+      background-color: $light-gray;
+    }
+
+    .cancel {
+      background-color: rgb(255, 102, 102);
+      border-color: rgb(255, 102, 102);
+      color: white;
+      margin-right: 0;
+    }
+
+    .cancel:hover {
+      background-color: rgb(255, 59, 59);
+      border-color: rgb(255, 59, 59);
+      color: white;
+    }
+
+    .add {
+      background-color: rgb(86, 103, 255);
+      border-color: rgb(86, 103, 255);
+      color: white;
+      margin-right: 0;
+    }
+
+    .add:hover {
+      background-color: rgb(59, 79, 255);
+      border-color: rgb(59, 79, 255);
+      color: white;
+    }
+  }
+
+  .connected-account {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    text-align: left;
+    color: white;
+    font-size: 17px;
+    background-color: rgb(49, 49, 49);
+    padding: 7px 14px;
+    margin: 5px;
+    border-radius: 5px;
+    font-family: monospace;
+    z-index: 100;
+  }
+
+  .connect-with-metamask {
+    width: 30vw;
+    height: 30vh;
+    background-color: rgb(34, 34, 34);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    p {
+      color: white;
+      font-size: 18px;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      background-color: rgb(44, 47, 54);
+      outline: none;
+      border: 1px solid rgb(64, 68, 79);
+      border-radius: 12px;
+      padding: 1rem;
+      width: 100%;
+      text-align: left;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      border-color: $main-blue;
+    }
+  }
+
+  .data-field:hover .tools {
+    display: flex;
+  }
+
+  .passwordField {
+    -webkit-text-security: disc;
+  }
+
+  .passwordField:focus {
+    -webkit-text-security: none;
+  }
+
+  .spinner {
+    border: 8px solid white;
+    border-radius: 100%;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    width: 50px;
+    height: 50px;
+    animation: spinner-turn 1.2s linear infinite;
+  }
+
+  @keyframes spinner-turn {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+// MAIN STYLES
+// #root {
+//   width: 100%;
+//   height: 100%;
+//   position: relative;
+
+//   .unlocked-div {
+//     height: 100%;
+//     display: flex;
+//     flex-direction: column;
+
+//     .top-items {
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       border-bottom: 2px solid $main-gray;
+
+//       .search-bar {
+//         width: 85%;
+
+//         input {
+//           padding: 1.3rem 1.8rem;
+//           width: 100%;
+//           font-size: 1.9rem;
+//           border: 0 none;
+//           box-sizing: border-box;
+//         }
+
+//         input:focus {
+//           outline: 0 none;
+//         }
+
+//         input::placeholder {
+//           color: rgb(185, 185, 185);
+//         }
+//       }
+
+//       .addItemButton {
+//         width: 15%;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+
+//         button {
+//           border-radius: 100%;
+//           border: 1px solid $main-gray;
+//           background-color: white;
+//           padding: 3px;
+//           color: $main-blue;
+//           font-weight: bold;
+//           font-size: 2.5rem;
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//         }
+
+//         .menu {
+//           position: absolute;
+//           top: 0;
+//           left: 100%;
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//           width: 100%;
+//           height: 100%;
+
+//           .space {
+//             width: 100%;
+//             height: 100%;
+//             left: 0;
+//             position: absolute;
+//             background: rgba(0, 0, 0, 0.4);
+//           }
+
+//           .options {
+//             position: absolute;
+//             transform: translateX(100%);
+//             transition: transform 200ms;
+//             padding: 3%;
+//             background-color: $light-gray;
+//             z-index: 100;
+//             width: 50%;
+//             height: 100%;
+//             color: $text-gray;
+//             border-left: 2px solid $main-gray;
+//             right: 0;
+
+//             ul {
+//               border: 1px solid $main-gray;
+//               font-size: 1rem;
+//               border-radius: 5px;
+//               background-color: white;
+//               cursor: pointer;
+
+//               li {
+//                 padding: 10px 20px;
+
+//                 span {
+//                   float: right;
+//                 }
+//               }
+
+//               li:hover {
+//                 background-color: $light-gray;
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//     hidden hover:flex .content {
+//       display: flex;
+//       height: 100%;
+
+//       .recommended {
+//         width: 40%;
+//         border-right: 2px solid $main-gray;
+//         cursor: pointer;
+//         overflow-y: auto;
+
+//         .recommended-item {
+//           padding: 6px;
+//           border-bottom: 1px solid $main-gray;
+//           display: flex;
+
+//           .item-img {
+//             width: 40px;
+//             height: 40px;
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//             color: white;
+//             font-weight: bold;
+//             font-size: 2rem;
+//             text-transform: uppercase;
+//             border-radius: 2px;
+//           }
+
+//           .item-info {
+//             display: flex;
+//             flex-direction: column;
+//             justify-content: center;
+//             margin-left: 0.5rem;
+
+//             h2 {
+//               font-size: 18px;
+//             }
+
+//             span {
+//               font-size: 15px;
+//               color: #333;
+//             }
+
+//             .item-notfound {
+//               color: $text-gray;
+//               padding: 0.3rem 0;
+//             }
+//           }
+//         }
+//       }
+
+//       .recommended-selected {
+//         background-color: $primary-light;
+//       }
+
+//       .data {
+//         width: 60%;
+//         height: 100%;
+//         background-color: $light-gray;
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: center;
+//         align-items: center;
+
+//         .primary {
+//           display: flex;
+//           align-items: flex-start;
+//           margin-bottom: 10px;
+//           height: 20%;
+//           width: 100%;
+//           padding: 1rem;
+
+//           .item-img {
+//             width: 65px;
+//             height: 65px;
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//             color: white;
+//             font-weight: bold;
+//             font-size: 2.5rem;
+//             text-transform: uppercase;
+//             border-radius: 2px;
+//           }
+
+//           .primary-data {
+//             display: flex;
+//             flex-direction: column;
+//             margin-left: 8px;
+
+//             h1 {
+//               font-size: 2rem;
+//               margin-bottom: 5px;
+//             }
+
+//             span {
+//               color: $main-blue;
+//               font-size: 1rem;
+//             }
+//           }
+//         }
+
+//         .secondary {
+//           overflow-y: auto;
+//           width: 100%;
+//           height: 65%;
+//           padding: 1rem;
+
+//           .secondary-data {
+//             display: flex;
+//             flex-direction: column;
+//             background-color: white;
+//             border-radius: 10px;
+//             overflow: hidden;
+//             border: 1px solid $main-gray;
+
+//             .data-field-div {
+//               display: flex;
+//               align-items: center;
+//               border-top: 1px solid $main-gray;
+//               height: 50px;
+//               cursor: pointer;
+//               position: relative;
+
+//               .data-field {
+//                 display: flex;
+//                 flex-direction: column;
+//                 justify-content: center;
+//                 height: 100%;
+//                 width: 100%;
+//                 padding-left: 1rem;
+//                 padding-right: 1rem;
+//                 box-sizing: border-box;
+
+//                 .field-name {
+//                   color: $primary-dark;
+//                   font-size: 14px;
+//                   line-height: 16px;
+//                 }
+
+//                 .field-content {
+//                   font-size: 17px;
+//                   line-height: 19px;
+//                   color: $text-gray;
+//                 }
+//               }
+
+//               &:hover .data-field {
+//                 background-color: $primary-light;
+//               }
+
+//               .data-field:hover {
+//                 background-color: rgb(231, 231, 231);
+//               }
+
+//               &:hover .tools {
+//                 display: flex;
+//               }
+
+//               .tools {
+//                 position: absolute;
+//                 right: 0;
+//                 display: none;
+//                 width: 35%;
+//                 height: 100%;
+//                 justify-content: flex-end;
+
+//                 .data-copy,
+//                 .data-reveal {
+//                   font-size: 1rem;
+//                   display: block;
+//                   color: $main-blue;
+//                   width: 50%;
+//                   display: flex;
+//                   justify-content: center;
+//                   align-items: center;
+//                   height: 100%;
+//                   background-color: $primary-light;
+//                   border-left: 1px solid $main-gray;
+//                 }
+
+//                 .data-copy:hover,
+//                 .data-reveal:hover {
+//                   background-color: rgb(231, 231, 231);
+//                 }
+//               }
+
+//               .onlyCopy {
+//                 width: 17.5%;
+
+//                 .data-copy {
+//                   width: 100%;
+//                 }
+//               }
+//             }
+
+//             .large,
+//             .medium {
+//               height: 150px;
+
+//               .data-field {
+//                 justify-content: start;
+//                 padding-top: 2%;
+//                 padding-bottom: 2%;
+//                 overflow: hidden;
+
+//                 .field-name {
+//                   margin-bottom: 2px;
+//                 }
+//               }
+//             }
+
+//             .medium {
+//               height: 100px;
+//             }
+//           }
+
+//           .dates {
+//             display: flex;
+//             width: 100%;
+//             flex-direction: column;
+//             justify-content: center;
+//             align-items: center;
+//             margin-top: 5%;
+//             font-size: 14px;
+
+//             span {
+//               color: rgb(102, 102, 102);
+//               margin: 2px 0;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+
+//   .locked-div {
+//     height: 100vh;
+//     width: 100vw;
+//     background-color: $light-gray;
+//     display: flex;
+//     position: relative;
+//     justify-content: center;
+//     align-items: center;
+//     flex-direction: column;
+//     border: 1px solid $main-gray;
+
+//     .form {
+//       display: flex;
+//       width: 100%;
+//       height: 60px;
+//       padding: 0 15%;
+
+//       .unlock-pass {
+//         padding-left: 1.3rem;
+//         font-size: 1.3rem;
+//         border: 1px solid $main-gray;
+//         border-radius: 2px 0 0 2px;
+//         box-sizing: border-box;
+//         width: 90%;
+//         height: 100%;
+//       }
+
+//       .unlock-pass:focus {
+//         outline: 0 none;
+//       }
+
+//       .unlock-button {
+//         width: 10%;
+//         height: 100%;
+//         background-color: $primary;
+//         border: 0 none;
+//         border-radius: 0 2px 2px 0;
+//         color: #eee;
+//         font-size: 20px;
+//       }
+//     }
+
+//     .wrong-pass-div {
+//       display: none;
+//     }
+//   }
+
+//   .wrong-pass {
+//     input,
+//     button {
+//       border: 1px solid $error !important;
+//     }
+
+//     .wrong-pass-div {
+//       position: absolute;
+//       display: flex;
+//       flex-direction: column;
+//       width: 100%;
+//       margin: 0 15%;
+//       text-align: center;
+//       top: 60%;
+
+//       h2 {
+//         color: $error;
+//         font-weight: bold;
+//         font-size: 1.4rem;
+//       }
+//     }
+//   }
+
+//   .addItem {
+//     display: flex;
+//     position: relative;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     margin: 5% auto;
+//     height: 90%;
+//     width: 90%;
+//     background-color: white;
+//     border-radius: 10px;
+//     overflow: hidden;
+//     border: 1px solid $main-gray;
+
+//     .data-field-div {
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: center;
+//       align-items: center;
+//       cursor: pointer;
+//       width: 100%;
+
+//       .data-field {
+//         display: flex;
+//         justify-content: flex-end;
+//         align-items: flex-start;
+//         box-sizing: border-box;
+//         width: 80%;
+//         margin: 3px 0;
+
+//         .field-name {
+//           color: $primary-dark;
+//           font-size: 16px;
+//           line-height: 19px;
+//           text-align: right;
+//           padding: 4px 6px;
+//           padding-right: 10px;
+//           width: 25%;
+//         }
+
+//         .field-content {
+//           font-size: 16px;
+//           line-height: 19px;
+//           color: $text-gray;
+//           width: 75%;
+//           border-radius: 2px;
+//           padding: 4px 6px;
+//           border: 1px solid $main-gray;
+//           background-color: white;
+//           box-sizing: border-box;
+//         }
+
+//         .field-content:hover {
+//           border: 1px solid $main-blue;
+//         }
+
+//         .field-content:focus {
+//           border: 1px solid $main-blue;
+//           outline: 0 none;
+//         }
+
+//         .passwordField {
+//           -webkit-text-security: disc;
+//         }
+
+//         .passwordField:focus {
+//           -webkit-text-security: none;
+//         }
+
+//         textarea {
+//           min-height: 70px;
+//           height: 70px;
+//           resize: vertical;
+//         }
+//       }
+//     }
+//   }
+// }
