@@ -8,7 +8,7 @@ import WebRouter from "./routers/WebRouter";
 export default function App() {
   return (
     <>
-      <Router>
+      <Router path={process.env.PUBLIC_URL + "/"}>
         <Switch>
           <Route path="/app">
             <AppRouter />

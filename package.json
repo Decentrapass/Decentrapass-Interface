@@ -1,5 +1,6 @@
 {
-  "name": "np-pass",
+  "homepage": "https://decentrapass.github.io/Decentrapass-v1-Interface/",
+  "name": "decentrapass",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -26,6 +27,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
+    "predeploy": "craco build",
+    "deploy": "gh-pages -d build",
     "build:extension": "node ./scripts/build-non-split.js && npm run build:clean",
     "build:clean": "cd build && mv static/js/*.js main.js && mv static/css/*.css main.css && rm -r static",
     "eject": "react-scripts eject"
@@ -50,6 +53,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.6",
+    "gh-pages": "^3.1.0",
     "postcss": "^7.0.35",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
   }
