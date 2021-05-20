@@ -26,7 +26,9 @@ function PendingTxs(props) {
           <IoMdClose className="text-2xl ml-4" onClick={props.closeMenu} />
         </div>
         <div className="flex flex-col border border-solid border-gray-500 rounded-xl p-3 my-5 mx-5">
-          <span className="text-xl mb-3">{formatAccount(props.account)}</span>
+          <span className="text-xl mb-3">
+            {formatAccount(props.account, 4)}
+          </span>
           <div className="flex">
             <a
               href={"https://etherscan.io/address/" + props.account}
@@ -57,9 +59,10 @@ function PendingTxs(props) {
                 key={key}
                 target="_black"
                 rel="noreferrer"
-                className="text-green-500 hover:underline my-1"
+                className="text-green-500 hover:underline my-1 flex"
               >
-                {tx}
+                <FiExternalLink className="mr-1" />
+                <span>{formatAccount(tx, 14)}</span>
               </a>
             );
           })}

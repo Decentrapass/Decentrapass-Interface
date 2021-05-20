@@ -1,5 +1,11 @@
 import React, { Component } from "react";
+
+// ICONS
+import { FaUserAlt } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
+import { AiFillCreditCard } from "react-icons/ai";
+import { CgNotes } from "react-icons/cg";
+
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { addItem, changePage } from "../../state/actions";
@@ -64,7 +70,7 @@ class AddItemButton extends Component {
                 className="flex align-center w-full p-5 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer"
               >
                 <span className="mr-2">
-                  <IoMdAdd />
+                  <FaUserAlt />
                 </span>
                 Login
               </li>
@@ -73,7 +79,7 @@ class AddItemButton extends Component {
                 className="flex align-center w-full p-5 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer"
               >
                 <span className="mr-2">
-                  <IoMdAdd />
+                  <AiFillCreditCard />
                 </span>
                 Credit Card
               </li>
@@ -82,7 +88,7 @@ class AddItemButton extends Component {
                 className="flex align-center w-full p-5 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer"
               >
                 <span className="mr-2">
-                  <IoMdAdd />
+                  <CgNotes />
                 </span>
                 Secure Note
               </li>

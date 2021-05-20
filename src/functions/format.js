@@ -10,16 +10,22 @@ export const formatCard = (card) => {
 };
 
 export async function formatData(numItems, contract, acc) {
-  // "Google,google.com,dmelchor,dmh672@gmail.com,abcdefg12345,this should be a note"
   let arr = [];
   let count = 0;
   for (let i = 0; i < numItems; i++) {
     let itemData = await contract.objects(acc, i).call();
 
     let type = itemData[0];
-    let receivedData = itemData[1].split(",");
 
-    if (receivedData != "") {
+    if (itemData[1] != "") {
+      let ipfsData;
+      let url = "https://gateway.ipfs.io/ipfs/" + itemData[1];
+
+      let res = await fetch(url);
+      ipfsData = await res.text();
+
+      let receivedData = ipfsData.split(",");
+
       let data = {
         numId: count++,
         id: i,
@@ -63,10 +69,10 @@ export function formatSend(data) {
   return str.substring(0, str.length - 1);
 }
 
-export function formatAccount(acc) {
+export function formatAccount(acc, n) {
   acc = acc || "";
   let shortAcc =
-    acc.substring(0, 6) + "..." + acc.substring(acc.length - 4, acc.length);
+    acc.substring(0, n + 2) + "..." + acc.substring(acc.length - n, acc.length);
 
   return shortAcc;
 }

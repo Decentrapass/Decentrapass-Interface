@@ -86,7 +86,7 @@ class AppNav extends Component {
             className="flex focus:outline-none h-full"
           >
             <div className="text-xl h-full bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-200 rounded px-4 ml-2 font-mono flex items-center">
-              <span>Account: {formatAccount(this.props.account)}</span>
+              <span>Account: {formatAccount(this.props.account, 4)}</span>
             </div>
           </button>
           <button

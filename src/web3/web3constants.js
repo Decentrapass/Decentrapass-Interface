@@ -1,4 +1,4 @@
-export const TOKEN_ADDRESS = "0x6d99e6708b54a08dC9f7344C1f63E6629F90778c";
+export const TOKEN_ADDRESS = "0xCd975CDe0532F2DebDcF9c6505086b563b6a28a1";
 
 export const TOKEN_ABI = [
   {
@@ -23,7 +23,7 @@ export const TOKEN_ABI = [
       },
       {
         internalType: "string",
-        name: "_data",
+        name: "_hash",
         type: "string",
       },
     ],
@@ -46,7 +46,7 @@ export const TOKEN_ABI = [
       },
       {
         internalType: "string",
-        name: "_data",
+        name: "_hash",
         type: "string",
       },
     ],
@@ -109,7 +109,7 @@ export const TOKEN_ABI = [
       },
       {
         internalType: "string",
-        name: "data",
+        name: "hash",
         type: "string",
       },
     ],

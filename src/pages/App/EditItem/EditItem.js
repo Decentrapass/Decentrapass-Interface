@@ -3,10 +3,22 @@ import { connect } from "react-redux";
 import AddDataField from "../AddItem/DataCreate/AddDataField";
 import { IF } from "../../../components/Constants/AddInterfaces";
 import { encrypt } from "../../../functions/encryption";
-import { changeItem, changePage, saveItems } from "../../../state/actions";
+import {
+  changeItem,
+  changePage,
+  saveItems,
+  saveTx,
+} from "../../../state/actions";
 import { TYPES_INT } from "../../../components/Constants/constants";
 import { Redirect } from "react-router";
 import { formatItem, formatSend } from "../../../functions/format";
+
+const { create } = require("ipfs-http-client");
+const ipfs = create({
+  host: "ipfs.infura.io",
+  port: 5001,
+  protocol: "https",
+});
 
 const mapStateToProps = (state) => {
   return {
@@ -23,6 +35,7 @@ const mapDispatchToProps = (dispatch) => {
     changePage: (page) => dispatch(changePage(page)),
     changeItem: (item) => dispatch(changeItem(item)),
     saveItems: (items) => dispatch(saveItems(items)),
+    saveTx: (tx) => dispatch(saveTx(tx)),
   };
 };
 
@@ -61,7 +74,7 @@ class EditItem extends Component {
     this.setState({ [name]: val }); // Saves input values on state
   }
 
-  handleSubmit() {
+  async handleSubmit() {
     var fields = IF[this.props.currentItem.type];
     let type = TYPES_INT[this.props.currentItem.type];
     let data = [];
@@ -82,9 +95,17 @@ class EditItem extends Component {
 
     let toSend = formatSend(encrypt(data, this.props.password));
 
+    let res = await ipfs.add(toSend);
+
     this.props.contract.methods
-      .editObject(this.props.currentItem.id, toSend)
-      .send({ from: this.props.account });
+      .editObject(this.props.currentItem.id, res.path)
+      .send({ from: this.props.account })
+      .on(
+        "transactionHash",
+        function (hash) {
+          this.props.saveTx(hash);
+        }.bind(this)
+      );
 
     this.setState({ redirect: <Redirect to="/app/unlocked" /> });
   }

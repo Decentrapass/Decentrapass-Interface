@@ -13,6 +13,13 @@ import { TYPES_INT } from "../../../components/Constants/constants";
 import { formatItem, formatSend } from "../../../functions/format";
 import { Redirect } from "react-router-dom";
 
+const { create } = require("ipfs-http-client");
+const ipfs = create({
+  host: "ipfs.infura.io",
+  port: 5001,
+  protocol: "https",
+});
+
 const mapStateToProps = (state) => {
   return {
     addingItem: state.addingItem,
@@ -70,10 +77,12 @@ class AddItem extends Component {
     this.props.saveItems(this.props.items.concat([newItem]));
     this.props.changeItem(newItem);
 
-    let toSend = formatSend(encrypt(data, this.props.password));
+    let toSend = await formatSend(encrypt(data, this.props.password));
+
+    let res = await ipfs.add(toSend);
 
     this.props.contract.methods
-      .saveObject(type, nextId, toSend)
+      .saveObject(type, nextId, res.path)
       .send({ from: this.props.account })
       .on(
         "transactionHash",

@@ -16,6 +16,7 @@ import {
   changePage,
   filterItems,
   saveItems,
+  saveTx,
 } from "../../../../state/actions";
 import { Redirect } from "react-router";
 
@@ -36,6 +37,7 @@ const mapDispatchToProps = (dispatch) => {
     changeItem: (item) => dispatch(changeItem(item)),
     filterItems: (items) => dispatch(filterItems(items)),
     addItem: (item) => dispatch(addItem(item)),
+    saveTx: (tx) => dispatch(saveTx(tx)),
   };
 };
 
@@ -55,7 +57,13 @@ class DataDisplay extends Component {
   async deleteHandler() {
     this.props.contract.methods
       .deleteObject(this.props.currentItem.id)
-      .send({ from: this.props.account });
+      .send({ from: this.props.account })
+      .on(
+        "transactionHash",
+        function (hash) {
+          this.props.saveTx(hash);
+        }.bind(this)
+      );
 
     let newItems = this.props.items;
     let delPos;

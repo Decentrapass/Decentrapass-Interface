@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { hash } from "../../../functions/encryption";
-import { changePage, saveLogin } from "../../../state/actions";
+import { changePage, saveLogin, saveTx } from "../../../state/actions";
 
 import LogoNBG from "../../../img/logo-nobg.png";
 
@@ -18,6 +18,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     changePage: (page) => dispatch(changePage(page)),
     saveLogin: (bool) => dispatch(saveLogin(bool)),
+    saveTx: (tx) => dispatch(saveTx(tx)),
   };
 };
 
@@ -51,7 +52,13 @@ export class Register extends Component {
 
     this.props.contract.methods
       .setPass(pass)
-      .send({ from: this.props.account });
+      .send({ from: this.props.account })
+      .on(
+        "transactionHash",
+        function (hash) {
+          this.props.saveTx(hash);
+        }.bind(this)
+      );
     this.props.saveLogin(true);
     this.setState({ redirect: <Redirect to="/app/unlocked" /> });
   }
@@ -65,7 +72,7 @@ export class Register extends Component {
             <input
               id="unlock-input"
               type="password"
-              className="w-full border-2 text-white bg-gray-700 border-gray-700 text-2xl px-5 py-3 focus:outline-none focus:border-blue-500 rounded-bl-xl"
+              className="w-full border-2 border-solid dark:text-white bg-gray-300 border-gray-300 dark:bg-gray-700 dark:border-gray-700 text-2xl px-5 py-3 focus:outline-none focus:border-blue-500 dark:focus:outline-none dark:focus:border-blue-500 rounded-bl-xl"
               placeholder="Enter a new master password"
               onChange={(e) => {
                 this.setState({ pass: e.target.value });
