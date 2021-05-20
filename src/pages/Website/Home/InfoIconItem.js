@@ -2,7 +2,7 @@ import React from "react";
 
 export default function InfoIconItem(props) {
   return (
-    <div className="flex flex-col items-start justify-center dark:text-gray-200">
+    <div className="mb-16 lg:m-0 flex flex-col items-start justify-center dark:text-gray-200">
       <span className="text-green-500 flex w-full justify-center text-7xl">
         {props.item.icon}
       </span>

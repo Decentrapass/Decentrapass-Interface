@@ -55,7 +55,7 @@ class AppRouter extends Component {
   async connectMetamask() {
     var accessAllowed = false;
     try {
-      await window.ethereum.enable();
+      await window.ethereum.request({ method: "eth_requestAccounts" });
       accessAllowed = true;
     } catch (e) {
       console.log("MM Error:", e);

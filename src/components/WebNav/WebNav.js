@@ -2,14 +2,17 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../img/logo.png";
 
+// ICONS
 import { FaMoon } from "react-icons/fa";
-import { IoMdSunny } from "react-icons/io";
+import { IoMdSunny, IoMdClose } from "react-icons/io";
+import { FiMenu } from "react-icons/fi";
 
 class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
       scrolled: false,
+      menuOpen: false,
     };
 
     this.changeTheme = this.changeTheme.bind(this);
@@ -67,7 +70,7 @@ class Nav extends Component {
     return (
       <div
         className={
-          "fixed w-full h-20 flex justify-between items-center px-8 dark:text-gray-200 bg-green-50 dark:bg-gray-900 web-menu border-solid border-b-2 " +
+          "web-menu fixed w-full h-20 flex justify-between items-center px-8 dark:text-gray-200 bg-green-50 dark:bg-gray-900 border-solid border-b-2 z-100 " +
           (this.state.scrolled
             ? "border-gray-400 dark:border-white"
             : "border-green-50 dark:border-gray-900")
@@ -77,7 +80,8 @@ class Nav extends Component {
           <img src={Logo} className="h-full mr-2" />
           <span className="text-xl font-mono">Decentrapass</span>
         </Link>
-        <div className="flex items-center justify-center">
+        {/* LARGE SCREENS */}
+        <div className="items-center justify-center hidden lg:flex">
           <Link to="/docs" className="mx-5 hover:underline">
             Documentation
           </Link>
@@ -104,6 +108,61 @@ class Nav extends Component {
           >
             Launch Decentrapass
           </Link>
+        </div>
+
+        {/* MOBILE */}
+        <div className="flex lg:hidden items-center justify-center">
+          <button
+            onClick={this.changeTheme}
+            className="text-lg p-3 hover:text-gray-600 dark:hover:text-gray-400 ml-2 rounded focus:outline-none"
+          >
+            {this.state.icon}
+          </button>
+          {this.state.menuOpen ? (
+            <IoMdClose
+              className="text-2xl"
+              onClick={() => {
+                this.setState({ menuOpen: false });
+              }}
+            />
+          ) : (
+            <FiMenu
+              className="text-2xl"
+              onClick={() => {
+                this.setState({ menuOpen: true });
+              }}
+            />
+          )}
+          <div
+            className="flex flex-col w-full absolute top-full left-0 border-b-2 bg-green-50 dark:bg-gray-900 border-solid border-gray-400 dark:border-white overflow-hidden web-menu"
+            style={
+              this.state.menuOpen
+                ? {
+                    maxHeight: "500px",
+                  }
+                : { maxHeight: "0px" }
+            }
+          >
+            <div className="pb-5 px-12 flex flex-col">
+              <Link to="/docs" className="my-3">
+                Documentation
+              </Link>
+              <a
+                className="my-3"
+                href="https://github.com/Decentrapass"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+              <Link to="/token" className="my-3">
+                Governance
+              </Link>
+              <Link className="my-3 text-green-500 font-black" to="/app/login">
+                Launch Decentrapass
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     );

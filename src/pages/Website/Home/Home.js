@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import InfoIcons from "./InfoIcons";
 import Landing from "./Landing";
+import Platforms from "./Platforms";
 import TheSafeToken from "./TheSafeToken";
 
 class Home extends Component {
@@ -14,7 +15,7 @@ class Home extends Component {
         <Landing />
         <InfoIcons />
         <TheSafeToken />
-        <div className="w-full h-96 dark:bg-gray-900">TEST</div>
+        <Platforms />
       </div>
     );
   }

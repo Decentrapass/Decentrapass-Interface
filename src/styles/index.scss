@@ -173,8 +173,12 @@ body,
   }
 
   .web-menu {
-    transition-property: border, background-color;
+    transition-property: border, max-height, background-color;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
+  }
+
+  .z-100 {
+    z-index: 100;
   }
 }
