@@ -89,7 +89,11 @@ class AddItem extends Component {
         );
       this.setState({ render: <Redirect to="/unlocked" /> });
     } else {
-      this.setState({ render: <GuestTriedAction /> });
+      this.setState({
+        render: (
+          <GuestTriedAction onClose={() => this.setState({ render: null })} />
+        ),
+      });
     }
   }
 

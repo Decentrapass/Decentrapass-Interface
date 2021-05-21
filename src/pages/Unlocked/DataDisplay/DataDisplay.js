@@ -19,6 +19,7 @@ import {
   saveTx,
 } from "../../../state/actions";
 import { Redirect } from "react-router";
+import GuestTriedAction from "../../../components/Popups/GuestTriedAction";
 
 const mapStateToProps = (state) => {
   return {
@@ -45,38 +46,44 @@ class DataDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirect: null,
+      render: null,
     };
   }
 
   editHandler() {
     this.props.addItem(this.props.currentItem.type);
-    this.setState({ redirect: <Redirect to="/unlocked/edit" /> });
+    this.setState({ render: <Redirect to="/unlocked/edit" /> });
   }
 
   async deleteHandler() {
-    this.props.contract.methods
-      .deleteObject(this.props.currentItem.id)
-      .send({ from: this.props.account })
-      .on(
-        "transactionHash",
-        function (hash) {
-          this.props.saveTx(hash);
-        }.bind(this)
-      );
+    if (this.props.account !== "guest") {
+      this.props.contract.methods
+        .deleteObject(this.props.currentItem.id)
+        .send({ from: this.props.account })
+        .on(
+          "transactionHash",
+          function (hash) {
+            this.props.saveTx(hash);
+          }.bind(this)
+        );
 
-    let newItems = this.props.items;
-    let delPos;
+      let newItems = this.props.items;
+      let delPos;
 
-    for (let i = 0; i < this.props.items.length; i++)
-      if (this.props.items[i].numId === this.props.currentItem.numId)
-        delPos = i;
+      for (let i = 0; i < this.props.items.length; i++)
+        if (this.props.items[i].numId === this.props.currentItem.numId)
+          delPos = i;
 
-    console.log(delPos);
-
-    newItems.splice(delPos, 1);
-    this.props.saveItems(newItems);
-    this.props.changeItem(newItems[0]);
+      newItems.splice(delPos, 1);
+      this.props.saveItems(newItems);
+      this.props.changeItem(newItems[0]);
+    } else {
+      this.setState({
+        render: (
+          <GuestTriedAction onClose={() => this.setState({ render: null })} />
+        ),
+      });
+    }
   }
 
   render() {
@@ -84,7 +91,7 @@ class DataDisplay extends Component {
     if (displayItem)
       return (
         <div className="w-3/5 h-full dark:text-white bg-gray-100 dark:bg-gray-700 flex flex-col justify-between items-center border-l-2 border-solid border-gray-300 dark:border-gray-600">
-          {this.state.redirect}
+          {this.state.render}
           <div className="flex flex-col items-center w-full">
             <div className="flex items-center mb-4 w-full p-4">
               <div

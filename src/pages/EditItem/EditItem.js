@@ -107,7 +107,11 @@ class EditItem extends Component {
       this.setState({ render: <Redirect to="/unlocked" /> });
     } else {
       console.log("yes");
-      this.setState({ render: <GuestTriedAction /> });
+      this.setState({
+        render: (
+          <GuestTriedAction onClose={() => this.setState({ render: null })} />
+        ),
+      });
     }
   }
 

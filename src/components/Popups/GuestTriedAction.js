@@ -26,7 +26,7 @@ export default class GuestTriedAction extends Component {
         {this.state.redirect}
         <div className="relative rounded-xl p-5 bg-white dark:bg-gray-800 flex flex-col border-2 border-solid border-gray-400 dark:border-gray-500 dark:text-white w-1/3">
           <IoClose
-            onClick={this.handleClick}
+            onClick={this.props.onClose}
             className="absolute right-5 top-5 text-3xl cursor-pointer"
           />
           <div className="pb-7 w-full border-b border-solid border-gray-300 dark:border-gray-200">
