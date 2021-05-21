@@ -5,7 +5,7 @@ export default class ConnectAccount extends Component {
   render() {
     return (
       <div className="absolute bg-opacity-50 bg-black left-0 top-0 w-full h-full flex items-center justify-center z-50">
-        <div className="relative rounded-xl p-5 bg-white dark:bg-gray-800 flex flex-col border-2 border-solid border-gray-400 dark:border-gray-500 dark:text-white w-1/3">
+        <div className="relative rounded-xl p-5 bg-white dark:bg-gray-800 flex flex-col border-2 border-solid border-gray-400 dark:border-gray-500 dark:text-white w-11/12 lg:w-1/3">
           <IoClose
             onClick={this.props.noWallet}
             className="absolute right-5 top-5 text-3xl cursor-pointer"
