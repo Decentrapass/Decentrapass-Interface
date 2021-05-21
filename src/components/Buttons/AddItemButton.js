@@ -45,7 +45,7 @@ class AddItemButton extends Component {
         break;
     }
 
-    this.setState({ redirect: <Redirect to="/app/unlocked/addItem" /> });
+    this.setState({ redirect: <Redirect to="/unlocked/addItem" /> });
   };
 
   render() {

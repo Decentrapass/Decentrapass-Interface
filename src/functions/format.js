@@ -70,6 +70,8 @@ export function formatSend(data) {
 }
 
 export function formatAccount(acc, n) {
+  if (acc === "guest") return acc;
+
   acc = acc || "";
   let shortAcc =
     acc.substring(0, n + 2) + "..." + acc.substring(acc.length - n, acc.length);

@@ -1,20 +1,33 @@
 {
-  "short_name": "NoPass",
-  "name": "NoPass Password Manager",
-  "version": "0.1.0",
-  "manifest_version": 2,
-  "description": "An open-source, free and secure password manager",
-  "permissions": ["storage", "activeTab"],
-  "content_scripts": [
+  "short_name": "Decentrapass",
+  "name": "Decentrapass - A decentralized password manager",
+  "icons": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["./main.js"],
-      "css": ["./main.css"]
+      "src": "favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
-  "browser_action": {
-    "default_popup": "./popup.html",
-    "default_icon": "./img/transparent-logo.png"
-  },
-  "web_accessible_resources": ["img/transparent-logo.png"]
+  "start_url": ".",
+  "display": "standalone"
 }
