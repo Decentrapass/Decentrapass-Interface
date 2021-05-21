@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Decentrapass-v1-Interface/static/css/main.944fd195.chunk.css",
-    "main.js": "/Decentrapass-v1-Interface/static/js/main.e9c3b361.chunk.js",
-    "main.js.map": "/Decentrapass-v1-Interface/static/js/main.e9c3b361.chunk.js.map",
+    "main.js": "/Decentrapass-v1-Interface/static/js/main.c0f1c5ca.chunk.js",
+    "main.js.map": "/Decentrapass-v1-Interface/static/js/main.c0f1c5ca.chunk.js.map",
     "runtime-main.js": "/Decentrapass-v1-Interface/static/js/runtime-main.7b51c630.js",
     "runtime-main.js.map": "/Decentrapass-v1-Interface/static/js/runtime-main.7b51c630.js.map",
     "static/js/2.0fb0e4c1.chunk.js": "/Decentrapass-v1-Interface/static/js/2.0fb0e4c1.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.7b51c630.js",
     "static/js/2.0fb0e4c1.chunk.js",
     "static/css/main.944fd195.chunk.css",
-    "static/js/main.e9c3b361.chunk.js"
+    "static/js/main.c0f1c5ca.chunk.js"
   ]
 }
