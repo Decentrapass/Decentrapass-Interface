@@ -7,6 +7,7 @@ import { changeItem, changePage, saveItems, saveTx } from "../../state/actions";
 import { TYPES_INT } from "../../components/Constants/constants";
 import { Redirect } from "react-router";
 import { formatItem, formatSend } from "../../functions/format";
+import GuestTriedAction from "../../components/Popups/GuestTriedAction";
 
 const { create } = require("ipfs-http-client");
 const ipfs = create({
@@ -70,45 +71,50 @@ class EditItem extends Component {
   }
 
   async handleSubmit() {
-    var fields = IF[this.props.currentItem.type];
-    let type = TYPES_INT[this.props.currentItem.type];
-    let data = [];
+    if (this.props.account !== "guest") {
+      var fields = IF[this.props.currentItem.type];
+      let type = TYPES_INT[this.props.currentItem.type];
+      let data = [];
 
-    for (const i of Object.keys(fields)) {
-      data.push(this.state[i] || ""); // If null set to empty string (avoid errors)
-    }
+      for (const i of Object.keys(fields)) {
+        data.push(this.state[i] || ""); // If null set to empty string (avoid errors)
+      }
 
-    let prevItems = this.props.items;
-    prevItems[this.props.currentItem.numId] = formatItem(
-      type,
-      data,
-      this.props.currentItem.numId,
-      this.props.currentItem.id
-    );
-    this.props.saveItems(prevItems);
-    this.props.changeItem(prevItems[this.props.currentItem.numId]);
-
-    let toSend = formatSend(encrypt(data, this.props.password));
-
-    let res = await ipfs.add(toSend);
-
-    this.props.contract.methods
-      .editObject(this.props.currentItem.id, res.path)
-      .send({ from: this.props.account })
-      .on(
-        "transactionHash",
-        function (hash) {
-          this.props.saveTx(hash);
-        }.bind(this)
+      let prevItems = this.props.items;
+      prevItems[this.props.currentItem.numId] = formatItem(
+        type,
+        data,
+        this.props.currentItem.numId,
+        this.props.currentItem.id
       );
+      this.props.saveItems(prevItems);
+      this.props.changeItem(prevItems[this.props.currentItem.numId]);
 
-    this.setState({ redirect: <Redirect to="/unlocked" /> });
+      let toSend = formatSend(encrypt(data, this.props.password));
+
+      let res = await ipfs.add(toSend);
+
+      this.props.contract.methods
+        .editObject(this.props.currentItem.id, res.path)
+        .send({ from: this.props.account })
+        .on(
+          "transactionHash",
+          function (hash) {
+            this.props.saveTx(hash);
+          }.bind(this)
+        );
+
+      this.setState({ render: <Redirect to="/unlocked" /> });
+    } else {
+      console.log("yes");
+      this.setState({ render: <GuestTriedAction /> });
+    }
   }
 
   render() {
     return (
       <>
-        {this.state.redirect}
+        {this.state.render}
         <div className="flex flex-col relative bg-green-50 dark:bg-gray-900 w-full h-full justify-end items-center pb-24">
           <div className="flex flex-col justify-start items-center cursor-pointer w-2/3 h-5/6">
             <div className="overflow-y-auto w-full mb-10 border border-solid border-gray-400 dark:border-gray-200 p-8 rounded-xl">
