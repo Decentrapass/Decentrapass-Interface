@@ -9,8 +9,7 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 
 import PendingTxs from "../Popups/PendingTxs";
 import { formatAccount } from "../../functions/format";
-
-import { Link } from "react-router-dom";
+import Jazzicon from "./Jazzicon";
 
 const mapStateToProps = (state) => {
   return {
@@ -52,10 +51,11 @@ class Nav extends Component {
   }
 
   async componentDidUpdate(prevProps, prevState) {
-    if (prevProps.web3 !== this.props.web3 && this.props.web3)
+    if (prevProps.web3 !== this.props.web3 && this.props.web3) {
       this.setState({
         network: await this.props.web3.eth.net.getNetworkType(),
       });
+    }
   }
 
   async componentDidMount() {
@@ -96,6 +96,7 @@ class Nav extends Component {
               ) : (
                 <span>{formatAccount(this.props.account, 4)}</span>
               )}
+              <Jazzicon account={this.props.account} addedClasses="ml-3" />
             </div>
           </button>
           <button

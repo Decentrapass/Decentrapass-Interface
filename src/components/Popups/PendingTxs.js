@@ -6,6 +6,7 @@ import { IoMdClose } from "react-icons/io";
 import { FiExternalLink, FiCopy } from "react-icons/fi";
 
 import { formatAccount } from "../../functions/format";
+import Jazzicon from "../Nav/Jazzicon";
 
 const mapStateToProps = (state) => {
   return {
@@ -30,7 +31,10 @@ function PendingTxs(props) {
         </div>
         <div className="flex flex-col border border-solid border-gray-500 rounded-xl p-3 my-5 mx-5">
           <div className="flex justify-between items-center mb-3">
-            <p className="text-xl">{formatAccount(props.account, 4)}</p>
+            <div className="text-xl flex items-center">
+              <span>{formatAccount(props.account, 4)}</span>
+              <Jazzicon account={props.account} addedClasses="ml-3" />
+            </div>
             <button
               className="text-blue-500 py-1 px-2 text-md border border-solid border-blue-500 rounded-full hover:underline"
               onClick={props.connect}
