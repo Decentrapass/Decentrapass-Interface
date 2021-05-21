@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
 function PendingTxs(props) {
   return (
     <div
-      className="w-full h-full absolute top-0 left-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
+      className="w-full h-full absolute top-0 left-0 flex items-center justify-center z-30 bg-black bg-opacity-50"
       onClick={props.closeMenu}
     >
       <div className="bg-white dark:bg-gray-800 rounded-xl dark:text-white flex flex-col border-2 border-solid border-gray-400 dark:border-gray-500 overflow-hidden">

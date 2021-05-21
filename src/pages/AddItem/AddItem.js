@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import AddDataField from "./DataCreate/AddDataField";
 import { IF } from "../../components/Constants/AddInterfaces";
 import { encrypt } from "../../functions/encryption";
-import { changeItem, changePage, saveItems, saveTx } from "../../state/actions";
+import { changeItem, saveItems, saveTx } from "../../state/actions";
 import { TYPES_INT } from "../../components/Constants/constants";
 import { formatItem, formatSend } from "../../functions/format";
 import { Redirect } from "react-router-dom";
@@ -28,7 +28,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changePage: (page) => dispatch(changePage(page)),
     changeItem: (item) => dispatch(changeItem(item)),
     saveItems: (data) => dispatch(saveItems(data)),
     saveTx: (data) => dispatch(saveTx(data)),

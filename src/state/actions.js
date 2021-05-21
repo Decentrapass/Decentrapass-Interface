@@ -10,6 +10,7 @@ import {
   LOGIN,
   SAVE_CONTRACT,
   SAVE_TX,
+  LOADING,
 } from "./constants";
 
 // Action to save received items from backend
@@ -20,11 +21,6 @@ export const saveItems = (payload) => {
 // Action to display an item
 export const changeItem = (payload) => {
   return { type: CHANGE_ITEM, payload };
-};
-
-// Action to redirect user
-export const changePage = (payload) => {
-  return { type: PAGE_CHANGE, payload };
 };
 
 // Action to change creation interface
@@ -65,4 +61,9 @@ export const saveTx = (payload) => {
 // Action to save user is logged in
 export const saveLogin = (payload) => {
   return { type: LOGIN, payload };
+};
+
+// If page is loading
+export const loading = (payload) => {
+  return { type: LOADING, payload };
 };

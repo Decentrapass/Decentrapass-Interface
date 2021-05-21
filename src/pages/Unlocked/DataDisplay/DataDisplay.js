@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+
+import LOGO from "../../../img/logo-nobg.png";
+
 import {
   DATA_DISPLAY,
   LOGO_COLORS,
@@ -13,7 +16,6 @@ import { connect } from "react-redux";
 import {
   addItem,
   changeItem,
-  changePage,
   filterItems,
   saveItems,
   saveTx,
@@ -34,7 +36,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     saveItems: (data) => dispatch(saveItems(data)),
-    changePage: (page) => dispatch(changePage(page)),
     changeItem: (item) => dispatch(changeItem(item)),
     filterItems: (items) => dispatch(filterItems(items)),
     addItem: (item) => dispatch(addItem(item)),
@@ -90,7 +91,7 @@ class DataDisplay extends Component {
     var displayItem = this.props.currentItem;
     if (displayItem)
       return (
-        <div className="w-3/5 h-full dark:text-white bg-gray-100 dark:bg-gray-700 flex flex-col justify-between items-center border-l-2 border-solid border-gray-300 dark:border-gray-600">
+        <div className="w-3/4 h-full dark:text-white bg-green-50 dark:bg-gray-800 flex flex-col justify-between items-center">
           {this.state.render}
           <div className="flex flex-col items-center w-full">
             <div className="flex items-center mb-4 w-full p-4">
@@ -185,7 +186,13 @@ class DataDisplay extends Component {
           </div>
         </div>
       );
-    return <div className="data"></div>;
+    return (
+      <div className="data flex items-center justify-center w-3/4 h-full">
+        <div className="w-32 h-32 flex items-center justify-center bg-green-500 rounded-full opacity-30">
+          <img src={LOGO} className="h-2/3" />
+        </div>
+      </div>
+    );
   }
 }
 

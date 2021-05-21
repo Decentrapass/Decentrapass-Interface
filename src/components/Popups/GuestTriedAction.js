@@ -22,7 +22,7 @@ export default class GuestTriedAction extends Component {
 
   render() {
     return (
-      <div className="absolute bg-opacity-50 bg-black left-0 top-0 w-full h-full flex items-center justify-center z-50">
+      <div className="absolute bg-opacity-50 bg-black left-0 top-0 w-full h-full flex items-center justify-center z-30">
         {this.state.redirect}
         <div className="relative rounded-xl p-5 bg-white dark:bg-gray-800 flex flex-col border-2 border-solid border-gray-400 dark:border-gray-500 dark:text-white w-1/3">
           <IoClose

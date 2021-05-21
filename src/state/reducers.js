@@ -4,16 +4,15 @@ import {
   CHANGE_ITEM,
   DATA_RETRIEVE,
   FILTER_ITEMS,
-  PAGE_CHANGE,
   SAVE_PASS,
   SAVE_WEB3,
   SAVE_CONTRACT,
   LOGIN,
   SAVE_TX,
+  LOADING,
 } from "./constants";
 
 const initialState = {
-  page: "locked", // A self-made router
   addingItem: null, // To display the correct interface when adding an item
   items: [], // Items received from backend
   displayedItems: [], // Items displayed (for searching)
@@ -24,6 +23,7 @@ const initialState = {
   password: "", // Saves the users cyphered password
   pendingTxs: [],
   loggedIn: false, // Saves if the user has typed a password
+  isLoading: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -39,10 +39,10 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         currentItem: action.payload,
       };
-    case PAGE_CHANGE: // Redirecting a user
+    case LOADING: // Something needs to load
       return {
         ...state,
-        page: action.payload,
+        isLoading: action.payload,
       };
     case ADD_ITEM: // Change item creation interface
       return {

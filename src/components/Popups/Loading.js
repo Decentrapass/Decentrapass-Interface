@@ -7,7 +7,7 @@ class Loading extends Component {
   }
   render() {
     return (
-      <div className="w-full h-full z-50 bg-green-500 dark:bg-gray-900 flex justify-center items-center">
+      <div className="w-full h-full absolute top-0 left-0 bg-green-500 dark:bg-gray-900 flex justify-center items-center z-40">
         <div className="spinner"></div>
       </div>
     );

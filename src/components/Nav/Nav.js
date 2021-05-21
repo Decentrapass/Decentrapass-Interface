@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 
 // ICONS
 import { FaRegMoon } from "react-icons/fa";
-import { FiSun, FiCode } from "react-icons/fi";
-import { HiOutlineDotsHorizontal, HiOutlineBookOpen } from "react-icons/hi";
-import { AiOutlineInfoCircle } from "react-icons/ai";
+import { FiSun } from "react-icons/fi";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 import PendingTxs from "../Popups/PendingTxs";
-import { formatAccount } from "../../functions/format";
-import Jazzicon from "./Jazzicon";
+import OtherMenu from "../Popups/OtherMenu";
+import AccountButton from "./AccountButton";
+import Logo from "./Logo";
 
 const mapStateToProps = (state) => {
   return {
@@ -26,6 +26,7 @@ class Nav extends Component {
       icon: "",
       showTxs: false,
       menu: false,
+      web3: null,
     };
 
     this.changeTheme = this.changeTheme.bind(this);
@@ -50,11 +51,13 @@ class Nav extends Component {
     });
   }
 
-  async componentDidUpdate(prevProps, prevState) {
-    if (prevProps.web3 !== this.props.web3 && this.props.web3) {
+  async componentDidUpdate(prevProps) {
+    if (this.props.web3 && prevProps.web3 != this.state.web3) {
       this.setState({
+        web3: this.props.web3,
         network: await this.props.web3.eth.net.getNetworkType(),
       });
+      console.log("N", await this.props.web3.eth.net.getNetworkType());
     }
   }
 
@@ -80,67 +83,41 @@ class Nav extends Component {
             closeMenu={() => this.setState({ showTxs: false })}
           />
         )}
-        <div className="flex items-center justify-center lg:justify-end mb-3 mt-5 lg:mt-10 z-40 w-full absolute lg:left-1/2 lg:top-0 lg:w-2/3 lg:transform lg:-translate-x-1/2 h-10">
-          {window.innerWidth > 768 && (
+        <div className="flex items-center justify-between w-full px-8 py-5 border-b-2 border-solid border-green-700 dark:border-white">
+          <Logo />
+          <div className="flex h-10">
             <div className="text-xl bg-green-800 text-green-300 rounded px-4 font-mono capitalize flex items-center">
               <span>{this.state.network}</span>
             </div>
-          )}
-          <button
-            onClick={() => this.setState({ showTxs: true })}
-            className="flex focus:outline-none h-full"
-          >
-            <div className="text-xl h-full bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-200 rounded px-4 ml-2 font-mono flex items-center">
-              {window.innerWidth > 768 ? (
-                <span>Account: {formatAccount(this.props.account, 4)}</span>
-              ) : (
-                <span>{formatAccount(this.props.account, 4)}</span>
-              )}
-              <Jazzicon account={this.props.account} addedClasses="ml-3" />
-            </div>
-          </button>
-          <button
-            onClick={this.changeTheme}
-            className="text-lg px-3 bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 ml-2 rounded focus:outline-none h-full"
-          >
-            {this.state.icon}
-          </button>
-          <div
-            className="relative h-full"
-            onMouseEnter={() => this.setState({ menu: true })}
-            onMouseLeave={() => this.setState({ menu: false })}
-          >
-            <button className="text-lg px-3 h-full bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 ml-2 rounded focus:outline-none">
-              <HiOutlineDotsHorizontal />
+            <AccountButton
+              account={this.props.account}
+              openMenu={() => this.setState({ showTxs: true })}
+            />
+            <button
+              onClick={this.changeTheme}
+              className="text-lg px-3 bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 ml-2 rounded focus:outline-none h-full"
+            >
+              {this.state.icon}
             </button>
+            <div
+              className="relative h-full"
+              onFocus={() => this.setState({ menu: true })}
+              onBlur={() =>
+                setTimeout(
+                  // To be able to click the items before it closes
+                  function () {
+                    this.setState({ menu: false });
+                  }.bind(this),
+                  100
+                )
+              }
+            >
+              <button className="text-lg px-3 h-full bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 ml-2 rounded focus:outline-none">
+                <HiOutlineDotsHorizontal />
+              </button>
 
-            {this.state.menu && (
-              <div className="absolute bg-gray-100 dark:bg-gray-900 right-0 flex flex-col rounded-xl rounded-tr-none border-2 border-solid border-gray-300 dark:border-gray-500 overflow-hidden w-32">
-                <a
-                  href="https://decentrapass.github.io/Decentrapass-org/"
-                  className="w-full p-4 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-white flex items-center justify-start"
-                >
-                  <AiOutlineInfoCircle />
-                  <span className="ml-2">About</span>
-                </a>
-                <a
-                  href="https://decentrapass.github.io/Decentrapass-v1-docs/"
-                  className="w-full p-4 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-white flex items-center justify-start"
-                >
-                  <HiOutlineBookOpen />
-                  <span className="ml-2">Docs</span>
-                </a>
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://github.com/Decentrapass"
-                  className="w-full p-4 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-white flex items-center justify-start"
-                >
-                  <FiCode />
-                  <span className="ml-2">Code</span>
-                </a>
-              </div>
-            )}
+              {this.state.menu && <OtherMenu />}
+            </div>
           </div>
         </div>
       </>

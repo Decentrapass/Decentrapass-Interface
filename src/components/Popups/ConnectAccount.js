@@ -4,25 +4,30 @@ import { IoClose } from "react-icons/io5";
 export default class ConnectAccount extends Component {
   render() {
     return (
-      <div className="absolute bg-opacity-50 bg-black left-0 top-0 w-full h-full flex items-center justify-center z-50">
-        <div className="relative rounded-xl p-5 bg-white dark:bg-gray-800 flex flex-col border-2 border-solid border-gray-400 dark:border-gray-500 dark:text-white w-11/12 lg:w-1/3">
+      <div className="absolute bg-opacity-50 bg-black left-0 top-0 w-full h-full flex items-center justify-center z-30">
+        <div className="relative rounded-xl p-10 bg-white dark:bg-gray-800 flex flex-col border-2 border-solid border-gray-400 dark:border-gray-500 dark:text-white w-11/12 lg:w-1/3">
           <IoClose
             onClick={this.props.noWallet}
             className="absolute right-5 top-5 text-3xl cursor-pointer"
           />
-          <div className="pb-7 w-full border-b border-solid border-gray-300 dark:border-gray-200">
+          <div className="pb-7 w-full">
             <h1 className="font-black font-sans text-5xl mb-5">Hold on!</h1>
             <p className="leading-relaxed">
               This application requires you to connect an Ethereum wallet. To
               continue please choose one of the following options:
             </p>
           </div>
-          <div className="py-7 w-full border-b border-solid border-gray-300 dark:border-gray-200">
+          <div className="py-7 w-full">
             <h2 className="text-lg mb-3 font-black">
               1. Connect the Ethereum wallet of your choice
             </h2>
             <button
-              className="rounded-xl border border-solid border-gray-300 dark:border-gray-800 bg-gray-200 dark:bg-gray-700 hover:border-blue-500 dark:hover:border-blue-500 dark:text-white p-4 focus:outline-none w-full"
+              className={
+                "rounded-xl border border-solid border-gray-300 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-500 dark:text-white p-4 focus:outline-none w-full" +
+                (this.props.failed
+                  ? " bg-red-400 dark:bg-red-700"
+                  : " bg-gray-200 dark:bg-gray-700")
+              }
               onClick={() => this.props.connect()}
             >
               Metamask

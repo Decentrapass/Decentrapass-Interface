@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { hash } from "../../functions/encryption";
-import { changePage, saveLogin, saveTx } from "../../state/actions";
+import { saveLogin, saveTx } from "../../state/actions";
 
 import LogoNBG from "../../img/logo-nobg.png";
 
@@ -16,7 +16,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changePage: (page) => dispatch(changePage(page)),
     saveLogin: (bool) => dispatch(saveLogin(bool)),
     saveTx: (tx) => dispatch(saveTx(tx)),
   };
@@ -74,27 +73,54 @@ export class Register extends Component {
       <>
         {this.state.redirect}
         <div className="flex flex-col items-center justify-center w-full h-full">
-          <form
-            className="flex form w-11/12 lg:w-1/2 h-16"
-            onSubmit={this.handleSubmit}
-          >
-            <input
-              id="unlock-input"
-              type="password"
-              className="w-full border-2 border-solid dark:text-white bg-gray-300 border-gray-300 dark:bg-gray-700 dark:border-gray-700 text-xl lg:text-2xl px-5 py-3 focus:outline-none focus:border-blue-500 dark:focus:outline-none dark:focus:border-blue-500 rounded-bl-xl"
-              placeholder="Enter a new master password"
-              onChange={(e) => {
-                this.setState({ pass: e.target.value });
-              }}
-              autoFocus
-            />
-            <button
-              type="submit"
-              className="bg-blue-500 border-blue-500 py-3 px-4 rounded-tr-xl"
+          <div className="flex flex-col lg:flex-row w-11/12 lg:w-1/2 items-center justify-center">
+            <div className="h-full flex flex-col border-4 border-solid bg-green-200 dark:bg-gray-700 border-green-200 dark:border-gray-700 p-5 lg:px-10  border-r-0 dark:text-white lg:w-1/2 order-last lg:order-first">
+              <h1 className="font-black text-3xl">Register</h1>
+              <p className="leading-relaxed mt-3">
+                Enter a new password that will be used to confirm your identity
+                and decrypt your passwords. Make sure to save this url (
+                <a href="http://decentrapass.com" className="text-blue-500">
+                  decentrapass.com
+                </a>
+                ) to your bookmarks to avoid being phished in the future.
+              </p>
+              <p className="leading-relaxed mt-3">
+                The password will be the only thing you will need to remember to
+                log in. Make it as hard as possible and avoid saving it in the
+                internet or losing it, since it can't be changed when lost (due
+                to the nature of cyphering).
+              </p>
+              <p className="leading-relaxed mt-3">
+                Read more about our recommendations{" "}
+                <a href="" className="text-blue-500">
+                  here
+                </a>
+              </p>
+            </div>
+            <form
+              className="h-full flex flex-col items-center justify-center form border-4 border-solid border-green-200 dark:border-gray-700 p-5 lg:w-1/2 order-first lg:order-last"
+              onSubmit={this.handleSubmit}
             >
-              <img src={LogoNBG} className="h-full" />
-            </button>
-          </form>
+              <div className="flex h-16">
+                <input
+                  id="unlock-input"
+                  type="password"
+                  className="w-full border-2 border-solid dark:text-white bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-700 text-xl lg:text-2xl px-5 py-3 focus:outline-none focus:border-blue-500 dark:focus:outline-none dark:focus:border-blue-500 rounded-l"
+                  placeholder="New password..."
+                  onChange={(e) => {
+                    this.setState({ pass: e.target.value });
+                  }}
+                  autoFocus
+                />
+                <button
+                  type="submit"
+                  className="bg-green-500 border-green-500 py-3 px-4 rounded-r focus:outline-none flex items-center justify-center h-full"
+                >
+                  <img src={LogoNBG} className="h-full" />
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </>
     );

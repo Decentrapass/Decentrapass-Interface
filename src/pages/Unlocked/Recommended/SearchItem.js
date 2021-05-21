@@ -56,10 +56,10 @@ class SearchItem extends Component {
       <div
         className={
           // To show if an item is selected for display
-          "p-2 border-b border-gray-700 flex " +
+          "p-2 flex " +
           (this.props.currentItem &&
           this.props.currentItem.numId === this.props.itemId
-            ? "bg-gray-200 dark:bg-gray-700"
+            ? "bg-white dark:bg-gray-700 border-t border-b border-solid border-gray-200 dark:border-gray-900"
             : "")
         }
         onClick={this.handleClick}
