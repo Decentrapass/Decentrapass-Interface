@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import LOGO from "../../../img/logo-nobg.png";
+import { IoIosArrowBack } from "react-icons/io";
 
 import {
   DATA_DISPLAY,
@@ -91,9 +92,23 @@ class DataDisplay extends Component {
     var displayItem = this.props.currentItem;
     if (displayItem)
       return (
-        <div className="w-3/4 h-full dark:text-white bg-green-50 dark:bg-gray-800 flex flex-col justify-between items-center">
+        <div
+          className="w-full absolute lg:static lg:w-3/4 h-full dark:text-white bg-green-50 dark:bg-gray-800 flex flex-col justify-between items-center transition-transform"
+          style={
+            !this.props.show
+              ? { transform: "translateX(100%)" }
+              : { transform: "translateX(0)" }
+          }
+        >
           {this.state.render}
           <div className="flex flex-col items-center w-full">
+            <button
+              className="p-3 text-green-500 flex w-full lg:hidden items-end"
+              onClick={this.props.changeView}
+            >
+              <IoIosArrowBack className="text-lg" />
+              <span>back</span>
+            </button>
             <div className="flex items-center mb-4 w-full p-4">
               <div
                 className="w-16 h-16 flex items-center justify-center dark:text-white font-bold text-3xl uppercase rounded"

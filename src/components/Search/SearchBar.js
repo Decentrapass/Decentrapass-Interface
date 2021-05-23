@@ -49,12 +49,12 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="w-full relative overflow-hidden">
+      <div className="w-full h-full relative overflow-hidden">
         <input
           type="text"
           name="search"
           placeholder="Search..."
-          className="w-full dark:text-white bg-green-50 dark:bg-gray-800 text-2xl px-5 py-3 focus:outline-none border-b-2 border-r-2 border-gray-400 border-solid"
+          className="w-full dark:text-white bg-green-50 dark:bg-gray-800 text-2xl px-5 focus:outline-none border-b-2 border-r-2 border-gray-400 border-solid h-full"
           onChange={(e) => this.handleType(e)}
           onFocus={(e) => (e.target.placeholder = "")}
           onBlur={(e) => (e.target.placeholder = "Search...")}

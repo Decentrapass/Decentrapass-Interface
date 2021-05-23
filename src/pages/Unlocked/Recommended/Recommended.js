@@ -12,8 +12,15 @@ const mapStateToProps = (state) => {
 class Recommended extends Component {
   render() {
     return (
-      <div className="flex flex-col w-1/4 border-r-2 border-solid border-gray-400 dark:bg-gray-800">
-        <div className="flex w-full">
+      <div
+        className="flex flex-col w-full h-full absolute lg:static lg:w-1/4 border-r-2 border-solid border-gray-400 dark:bg-gray-800 transition-transform"
+        style={
+          !this.props.show
+            ? { transform: "translateX(-100%)" }
+            : { transform: "translateX(0)" }
+        }
+      >
+        <div className="flex w-full h-16">
           <SearchBar />
           <AddItemButton />
         </div>
@@ -39,6 +46,7 @@ class Recommended extends Component {
                 shown={shown}
                 type={item.type}
                 chosenKey={chosenKey}
+                changeView={this.props.changeView}
               />
             );
           })}

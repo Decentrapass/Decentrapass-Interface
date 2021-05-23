@@ -57,7 +57,6 @@ class Nav extends Component {
         web3: this.props.web3,
         network: await this.props.web3.eth.net.getNetworkType(),
       });
-      console.log("N", await this.props.web3.eth.net.getNetworkType());
     }
   }
 
@@ -86,7 +85,7 @@ class Nav extends Component {
         <div className="flex items-center justify-between w-full px-8 py-5 border-b-2 border-solid border-green-700 dark:border-white">
           <Logo />
           <div className="flex h-10">
-            <div className="text-xl bg-green-800 text-green-300 rounded px-4 font-mono capitalize flex items-center">
+            <div className="text-xl bg-green-800 text-green-300 rounded px-4 font-mono capitalize flex items-center hidden lg:block">
               <span>{this.state.network}</span>
             </div>
             <AccountButton

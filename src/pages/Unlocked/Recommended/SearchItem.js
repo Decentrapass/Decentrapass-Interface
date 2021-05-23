@@ -27,6 +27,7 @@ class SearchItem extends Component {
     for (const i of this.props.items) {
       if (i.numId === this.props.itemId) {
         this.props.changeItem(i);
+        this.props.changeView();
         break;
       }
     }

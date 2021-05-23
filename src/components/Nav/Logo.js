@@ -11,7 +11,9 @@ export default function Logo() {
       <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
         <img src={LOGO} className="h-2/3 bg-green-500" />
       </div>
-      <span className="font-mono text-xl ml-3">Decentrapass</span>
+      <span className="font-mono text-xl ml-3 hidden lg:block">
+        Decentrapass
+      </span>
     </a>
   );
 }

@@ -124,6 +124,13 @@ class App extends Component {
     } else {
       this.setState({ showPopup: true });
     }
+
+    // Websites theme
+    if (localStorage.theme === "light") {
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
   }
 
   noWallet() {

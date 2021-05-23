@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/Decentrapass-v1-Interface/static/css/main.53de61ef.chunk.css",
-    "main.js": "/Decentrapass-v1-Interface/static/js/main.d4e456f2.chunk.js",
-    "main.js.map": "/Decentrapass-v1-Interface/static/js/main.d4e456f2.chunk.js.map",
+    "main.css": "/Decentrapass-v1-Interface/static/css/main.0a406c09.chunk.css",
+    "main.js": "/Decentrapass-v1-Interface/static/js/main.b8f3efec.chunk.js",
+    "main.js.map": "/Decentrapass-v1-Interface/static/js/main.b8f3efec.chunk.js.map",
     "runtime-main.js": "/Decentrapass-v1-Interface/static/js/runtime-main.7b51c630.js",
     "runtime-main.js.map": "/Decentrapass-v1-Interface/static/js/runtime-main.7b51c630.js.map",
-    "static/js/2.7fc21d2e.chunk.js": "/Decentrapass-v1-Interface/static/js/2.7fc21d2e.chunk.js",
-    "static/js/2.7fc21d2e.chunk.js.map": "/Decentrapass-v1-Interface/static/js/2.7fc21d2e.chunk.js.map",
+    "static/js/2.5591b702.chunk.js": "/Decentrapass-v1-Interface/static/js/2.5591b702.chunk.js",
+    "static/js/2.5591b702.chunk.js.map": "/Decentrapass-v1-Interface/static/js/2.5591b702.chunk.js.map",
     "index.html": "/Decentrapass-v1-Interface/index.html",
-    "static/css/main.53de61ef.chunk.css.map": "/Decentrapass-v1-Interface/static/css/main.53de61ef.chunk.css.map",
-    "static/js/2.7fc21d2e.chunk.js.LICENSE.txt": "/Decentrapass-v1-Interface/static/js/2.7fc21d2e.chunk.js.LICENSE.txt",
+    "static/css/main.0a406c09.chunk.css.map": "/Decentrapass-v1-Interface/static/css/main.0a406c09.chunk.css.map",
+    "static/js/2.5591b702.chunk.js.LICENSE.txt": "/Decentrapass-v1-Interface/static/js/2.5591b702.chunk.js.LICENSE.txt",
     "static/media/logo-nobg.e9bbf6ca.png": "/Decentrapass-v1-Interface/static/media/logo-nobg.e9bbf6ca.png"
   },
   "entrypoints": [
     "static/js/runtime-main.7b51c630.js",
-    "static/js/2.7fc21d2e.chunk.js",
-    "static/css/main.53de61ef.chunk.css",
-    "static/js/main.d4e456f2.chunk.js"
+    "static/js/2.5591b702.chunk.js",
+    "static/css/main.0a406c09.chunk.css",
+    "static/js/main.b8f3efec.chunk.js"
   ]
 }
