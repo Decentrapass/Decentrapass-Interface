@@ -8,6 +8,7 @@ import { saveLogin, saveTx } from "../../state/actions";
 
 // Icons
 import LogoNBG from "../../img/logo-nobg.png";
+import { setCookie } from "../../functions/cookies";
 
 const mapStateToProps = (state) => {
   return {
@@ -71,6 +72,7 @@ export class Register extends Component {
       );
 
     this.props.saveLogin(true);
+    setCookie("SESSION", pass, 1);
     this.setState({ redirect: <Redirect to="/unlocked" /> });
   }
 

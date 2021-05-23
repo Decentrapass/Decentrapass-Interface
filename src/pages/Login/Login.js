@@ -12,6 +12,7 @@ import { GUEST_DATA } from "./GuestExamples";
 import { decrypt, hash } from "../../functions/encryption";
 import { formatData } from "../../functions/format";
 import { saveItems, changeItem, saveLogin, loading } from "../../state/actions";
+import { deleteCookie, getCookie, setCookie } from "../../functions/cookies";
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -49,13 +50,10 @@ export class Login extends Component {
 
     // When contract is saved to state we allow login
     if (contract && !this.state.contractReceived) {
-      // Save to state to avoid infinite re-rendering
       this.setState({ contractReceived: true });
 
       // Guests dont connect to contract
       if (contract !== "guest") {
-        this.props.loading(true);
-        // Password from contract
         let pass = await this.props.contract.methods
           .password(this.props.account)
           .call();
@@ -67,18 +65,13 @@ export class Login extends Component {
         }
 
         // Automatic login
-        if (localStorage.localSession) {
+        if (getCookie("SESSION").length > 0) {
           // Stored hashed password in local storage
-          let passLS = localStorage.localSession.split("-")[0];
+          let passLS = getCookie("SESSION");
 
-          // Last login time
-          let time = new Date(localStorage.localSession.split("-")[1]);
-          let now = new Date();
-
-          // If last login < 1h -> login / else -> delete storage
-          let diff = (now.getTime() - time.getTime()) / 3600 / 1000;
-          if (diff >= 1 || diff < 0 || passLS !== pass) {
-            localStorage.removeItem("localSession");
+          // If the cookie has the wrong password we delete the session
+          if (passLS != pass) {
+            deleteCookie("SESSION");
             this.props.loading(false);
           } else {
             let numItems = await this.props.contract.methods
@@ -103,7 +96,7 @@ export class Login extends Component {
           }
         } else this.props.loading(false);
       } else this.props.loading(false);
-    } else if (!contract) this.props.loading(true);
+    } else this.props.loading(false);
   }
 
   async handleSubmit(e) {
@@ -137,14 +130,16 @@ export class Login extends Component {
       this.props.saveLogin(true);
       this.setState({ redirect: <Redirect to="/unlocked" /> });
 
-      var current = new Date().toLocaleString();
-
-      // Saving last user login - can be modified manually but its not a security risk
-      localStorage.setItem("localSession", pass + "-" + current);
+      // Saving last user login cookie
+      setCookie("SESSION", pass, 1);
     } else {
       this.props.saveLogin(false);
       this.setState({ wrongPass: true });
     }
+  }
+
+  componentDidMount() {
+    this.props.loading(true);
   }
 
   render() {

@@ -34,6 +34,8 @@ import EditItem from "./pages/EditItem/EditItem";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Unlocked from "./pages/Unlocked/Unlocked";
+import { getCookie } from "./functions/cookies";
+import FirstTime from "./components/Popups/FirstTime/FirstTime";
 
 // Redux
 const mapStateToProps = (state) => {
@@ -75,9 +77,10 @@ class App extends Component {
 
     const password = await contract.methods.password(accounts[0]).call();
 
-    window.ethereum.on("accountsChanged", function (accounts) {
-      window.location.reload();
-    });
+    window.ethereum.on("accountsChanged", () => window.location.reload());
+    window.ethereum.on("chainChanged", () => window.location.reload());
+    window.ethereum.on("connect", () => window.location.reload());
+    window.ethereum.on("disconnect", () => window.location.reload());
 
     this.props.changeAccount(accounts[0]);
     this.props.savePassword(password);
@@ -103,6 +106,7 @@ class App extends Component {
 
       this.setState({ showPopup: false });
       this.saveConnection(web3);
+      this.props.loading(false);
     } catch (e) {
       this.props.loading(false);
       this.setState({ failedConnect: true });
@@ -111,6 +115,9 @@ class App extends Component {
 
   // Checks if metamask is already connected and if so saves connection
   async componentWillMount() {
+    let isFirstTime = getCookie("VISIT").length > 0 ? false : true;
+    this.setState({ isFirstTime });
+
     if (typeof window.ethereum !== "undefined") {
       this.setState({ showPopup: false });
       const web3 = new Web3(window.ethereum);
@@ -121,9 +128,11 @@ class App extends Component {
         this.saveConnection(web3);
       } else {
         this.setState({ showPopup: true });
+        this.props.loading(false);
       }
     } else {
       this.setState({ showPopup: true });
+      this.props.loading(false);
     }
 
     // Websites theme
@@ -147,6 +156,9 @@ class App extends Component {
     return (
       <Router>
         {this.props.isLoading && <Loading />}
+        {this.state.isFirstTime && (
+          <FirstTime closeMenu={() => this.setState({ isFirstTime: false })} />
+        )}
         {this.state.showPopup && (
           <ConnectAccount
             connect={this.connect}

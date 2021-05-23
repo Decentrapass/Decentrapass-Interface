@@ -56,7 +56,7 @@ function PendingTxs(props) {
             </a>
             <span
               className="text-gray-500 hover:underline flex cursor-pointer"
-              onClick={navigator.clipboard.writeText(props.account)}
+              onClick={() => navigator.clipboard.writeText(props.account)}
             >
               <FiCopy />
               Copy Address

@@ -11,6 +11,7 @@ import PendingTxs from "../Popups/PendingTxs";
 import OtherMenu from "../Popups/OtherMenu";
 import AccountButton from "./AccountButton";
 import Logo from "./Logo";
+import { themesList } from "web3modal";
 
 const mapStateToProps = (state) => {
   return {
@@ -26,23 +27,25 @@ class Nav extends Component {
       network: "", // Current network
       icon: "", // moon/sun depending on theme
       showTxs: false, // txs menu open
-      open: false, // "other" menu open
+      showOther: false, // "other" menu open
       web3: null, // current web3 connection to detect change in props
     };
 
     this.changeTheme = this.changeTheme.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.toggleTxsMenu = this.toggleTxsMenu.bind(this);
+    this.showOtherMenu = this.showOtherMenu.bind(this);
     this.wrapperRef = React.createRef();
   }
 
   // Handles closing the "other" menu when clicking outside
   handleClick(e) {
     if (
-      this.state.open &&
+      this.state.showOther &&
       this.wrapperRef &&
       !this.wrapperRef.current.contains(e.target)
     ) {
-      this.setState({ open: false });
+      this.setState({ showOther: false });
     }
   }
 
@@ -66,6 +69,14 @@ class Nav extends Component {
     this.setState({
       icon: localStorage.theme === "light" ? <FaRegMoon /> : <FiSun />,
     });
+  }
+
+  toggleTxsMenu() {
+    this.setState({ showTxs: !this.state.showTxs });
+  }
+
+  showOtherMenu() {
+    this.setState({ showOther: true });
   }
 
   // If the props change and a network exists > display it
@@ -107,7 +118,7 @@ class Nav extends Component {
           this.state.showTxs && (
             <PendingTxs
               connect={this.props.connect}
-              closeMenu={() => this.setState({ showTxs: false })}
+              closeMenu={this.toggleTxsMenu}
             />
           )
         }
@@ -127,7 +138,7 @@ class Nav extends Component {
             </div>
             <AccountButton
               account={this.props.account}
-              openMenu={() => this.setState({ showTxs: true })}
+              openMenu={this.toggleTxsMenu}
             />
 
             {/* Theme button */}
@@ -142,12 +153,12 @@ class Nav extends Component {
             <div className="h-full relative">
               <button
                 className="text-lg px-3 h-full bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 ml-2 rounded focus:outline-none"
-                onClick={() => this.setState({ open: true })}
+                onClick={this.showOtherMenu}
               >
                 <HiOutlineDotsHorizontal />
               </button>
 
-              {this.state.open && <OtherMenu innerRef={this.wrapperRef} />}
+              {this.state.showOther && <OtherMenu innerRef={this.wrapperRef} />}
             </div>
           </div>
         </div>
