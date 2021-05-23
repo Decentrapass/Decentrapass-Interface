@@ -7,6 +7,7 @@ import {
   SelectField,
 } from "./CreateFields";
 
+// COMPONENT DECIDES WHAT FIELDS TO DISPLAY
 export default class AddDataField extends Component {
   constructor(props) {
     super(props);

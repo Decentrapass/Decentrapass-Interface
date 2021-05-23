@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+// Biggest field displayed (only copy button)
 export default class LargeField extends Component {
   constructor(props) {
     super(props);

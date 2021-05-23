@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+// Medium field displayed (only copy button)
 export default class MediumField extends Component {
   constructor(props) {
     super(props);

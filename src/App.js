@@ -68,6 +68,7 @@ class App extends Component {
     this.noWallet = this.noWallet.bind(this);
   }
 
+  // Connects to web3 and saves the contract
   async saveConnection(web3) {
     const contract = new web3.eth.Contract(TOKEN_ABI, TOKEN_ADDRESS);
     const accounts = await web3.eth.getAccounts();
@@ -82,10 +83,9 @@ class App extends Component {
     this.props.savePassword(password);
     this.props.saveContract(contract);
     this.props.saveWeb3(web3);
-
-    this.props.loading(false);
   }
 
+  // User clicked connect button > connect with web3modal
   async connect() {
     const providerOptions = {};
     const web3Modal = new Web3Modal({
@@ -109,6 +109,7 @@ class App extends Component {
     }
   }
 
+  // Checks if metamask is already connected and if so saves connection
   async componentWillMount() {
     if (typeof window.ethereum !== "undefined") {
       this.setState({ showPopup: false });
@@ -133,6 +134,7 @@ class App extends Component {
     }
   }
 
+  // Saves guest session
   noWallet() {
     this.props.changeAccount("guest");
     this.props.savePassword("1234");

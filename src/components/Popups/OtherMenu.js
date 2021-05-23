@@ -1,11 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 
+// ICONS
 import { FiCode, FiLogOut } from "react-icons/fi";
 import { HiOutlineBookOpen } from "react-icons/hi";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import { Component } from "react";
 
 export default class OtherMenu extends Component {
+  // Handles the log out
   logoutRequest() {
     localStorage.removeItem("localSession");
     window.location.reload();
@@ -13,7 +14,10 @@ export default class OtherMenu extends Component {
 
   render() {
     return (
-      <div className="absolute bg-gray-100 dark:bg-gray-900 right-0 flex flex-col rounded-xl rounded-tr-none border-2 border-solid border-gray-300 dark:border-gray-500 overflow-hidden w-32 z-30">
+      <div
+        className="absolute z-30 bg-gray-100 dark:bg-gray-900 top-full right-0 flex flex-col rounded-xl rounded-tr-none border-2 border-solid border-gray-300 dark:border-gray-500 overflow-hidden w-32"
+        ref={this.props.innerRef}
+      >
         <a
           href="https://decentrapass.github.io/Decentrapass-org/"
           className="w-full p-4 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-white flex items-center justify-start"

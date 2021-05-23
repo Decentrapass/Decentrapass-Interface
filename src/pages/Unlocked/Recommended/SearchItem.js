@@ -34,6 +34,7 @@ class SearchItem extends Component {
   };
 
   render() {
+    // Grabs the right items data or none
     let found = false;
     for (const i of this.props.items)
       if (i.numId === this.props.itemId) found = true;
@@ -86,8 +87,4 @@ class SearchItem extends Component {
   }
 }
 
-const connectedSearchItem = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchItem);
-export default connectedSearchItem;
+export default connect(mapStateToProps, mapDispatchToProps)(SearchItem);

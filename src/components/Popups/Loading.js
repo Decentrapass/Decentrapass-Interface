@@ -1,5 +1,6 @@
 import { Component } from "react";
 
+// Loading screen is displayed when some interface needs to load
 class Loading extends Component {
   constructor(props) {
     super(props);

@@ -1,6 +1,12 @@
 import React, { Component } from "react";
+
+// Functions
 import { connect } from "react-redux";
+
+// Constants
 import { SHOW_SEARCH } from "../../../components/Constants/constants";
+
+// Components
 import SearchItem from "./SearchItem";
 import AddItemButton from "../../../components/Popups/AddItemButton";
 import SearchBar from "../../../components/Search/SearchBar";

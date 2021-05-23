@@ -5,6 +5,7 @@ import { IoClose } from "react-icons/io5";
 import { BiErrorCircle } from "react-icons/bi";
 
 import { Redirect } from "react-router";
+import WalletOption from "../Buttons/WalletOption";
 
 export default class GuestTriedAction extends Component {
   constructor(props) {
@@ -16,21 +17,22 @@ export default class GuestTriedAction extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  // If a user wants to conenct > redirect to login
   handleClick() {
-    this.setState({ redirect: <Redirect to="/login" /> });
+    window.location.reload();
   }
 
   render() {
     return (
       <div className="absolute bg-opacity-50 bg-black left-0 top-0 w-full h-full flex items-center justify-center z-30">
         {this.state.redirect}
-        <div className="relative rounded-xl p-5 bg-white dark:bg-gray-800 flex flex-col border-2 border-solid border-gray-400 dark:border-gray-500 dark:text-white w-1/3">
+        <div className="relative rounded-xl p-5 bg-white dark:bg-gray-800 flex flex-col border-2 border-solid border-gray-400 dark:border-gray-500 dark:text-white w-11/12 lg:w-1/3">
           <IoClose
             onClick={this.props.onClose}
             className="absolute right-5 top-5 text-3xl cursor-pointer"
           />
           <div className="pb-7 w-full border-b border-solid border-gray-300 dark:border-gray-200">
-            <h1 className="font-black font-sans text-4xl mb-5 text-red-500 flex items-center">
+            <h1 className="font-black font-sans w-5/6 text-2xl lg:text-4xl mb-5 text-red-500 flex items-center">
               <BiErrorCircle />
               <span className="ml-3">Hey, you can't do that!</span>
             </h1>
@@ -43,12 +45,7 @@ export default class GuestTriedAction extends Component {
             <h2 className="text-lg mb-3 font-black">
               1. Connect the Ethereum wallet of your choice
             </h2>
-            <button
-              className="rounded-xl border border-solid border-gray-300 dark:border-gray-800 bg-gray-200 dark:bg-gray-700 hover:border-blue-500 dark:hover:border-blue-500 dark:text-white p-4 focus:outline-none w-full"
-              onClick={this.handleClick}
-            >
-              Metamask
-            </button>
+            <WalletOption connect={this.handleClick} option="Connect" />
           </div>
           <div className="pt-7">
             <h2 className="text-lg mb-3 font-black">
@@ -57,6 +54,8 @@ export default class GuestTriedAction extends Component {
             <a
               className="rounded-xl border border-solid border-gray-300 dark:border-gray-800 bg-gray-200 dark:bg-gray-700 hover:border-blue-500 dark:hover:border-blue-500 dark:text-white p-4 focus:outline-none w-full block text-center"
               href="https://metamask.io/"
+              target="_blank"
+              rel="noreferrer"
             >
               Install Metamask
             </a>

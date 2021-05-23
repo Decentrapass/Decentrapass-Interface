@@ -1,21 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+// Icons
 import LogoNBG from "../../img/logo-nobg.png";
 
-import { Redirect, withRouter } from "react-router-dom";
-
-import { decrypt, hash } from "../../functions/encryption";
-
-import { formatData } from "../../functions/format";
-import { saveItems, changeItem, saveLogin } from "../../state/actions";
+// Components
+import { Redirect } from "react-router-dom";
 import { GUEST_DATA } from "./GuestExamples";
+
+// Functions
+import { decrypt, hash } from "../../functions/encryption";
+import { formatData } from "../../functions/format";
+import { saveItems, changeItem, saveLogin, loading } from "../../state/actions";
 
 const mapDispatchToProps = (dispatch) => {
   return {
     saveItems: (data) => dispatch(saveItems(data)),
     changeItem: (item) => dispatch(changeItem(item)),
     saveLogin: (page) => dispatch(saveLogin(page)),
+    loading: (bool) => dispatch(loading(bool)),
   };
 };
 
@@ -38,29 +41,45 @@ export class Login extends Component {
     pass: "",
     wrongPass: false, // Manages error message
     redirect: null,
+    contractReceived: false,
   };
 
   async componentDidUpdate(prevProps, prevState) {
     const contract = this.props.contract;
 
-    if (contract) {
+    // When contract is saved to state we allow login
+    if (contract && !this.state.contractReceived) {
+      // Save to state to avoid infinite re-rendering
+      this.setState({ contractReceived: true });
+
+      // Guests dont connect to contract
       if (contract !== "guest") {
+        this.props.loading(true);
+        // Password from contract
         let pass = await this.props.contract.methods
           .password(this.props.account)
           .call();
 
+        // Redirect to register if no pass in contract
         if (!pass || pass === "") {
+          this.props.loading(false);
           this.setState({ redirect: <Redirect to="/register" /> });
         }
 
+        // Automatic login
         if (localStorage.localSession) {
+          // Stored hashed password in local storage
           let passLS = localStorage.localSession.split("-")[0];
+
+          // Last login time
           let time = new Date(localStorage.localSession.split("-")[1]);
           let now = new Date();
 
+          // If last login < 1h -> login / else -> delete storage
           let diff = (now.getTime() - time.getTime()) / 3600 / 1000;
           if (diff >= 1 || diff < 0 || passLS !== pass) {
             localStorage.removeItem("localSession");
+            this.props.loading(false);
           } else {
             let numItems = await this.props.contract.methods
               .numObjects(this.props.account)
@@ -72,16 +91,19 @@ export class Login extends Component {
               this.props.account
             );
 
+            // Decrypt contract data
             dataToSave = decrypt(dataToSave, pass);
 
+            // Save all data to state
             this.props.saveItems(dataToSave);
             this.props.changeItem(dataToSave[0]);
             this.props.saveLogin(true);
+            this.props.loading(false);
             this.setState({ redirect: <Redirect to="/unlocked" /> });
           }
-        }
-      }
-    }
+        } else this.props.loading(false);
+      } else this.props.loading(false);
+    } else if (!contract) this.props.loading(true);
   }
 
   async handleSubmit(e) {
@@ -150,8 +172,9 @@ export class Login extends Component {
                   type="password"
                   className="w-full h-full border-2 border-solid dark:text-white bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-700 text-xl lg:text-2xl px-5 py-3 focus:outline-none focus:border-blue-500 dark:focus:outline-none dark:focus:border-blue-500 rounded-l"
                   placeholder={
-                    "Password..." +
-                    (this.props.account === "guest" ? " (try '1234')" : "")
+                    this.props.account === "guest"
+                      ? "Try '1234'"
+                      : "Password..."
                   }
                   onChange={(e) => {
                     this.setState({ pass: e.target.value, wrongPass: false });
@@ -178,4 +201,4 @@ export class Login extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

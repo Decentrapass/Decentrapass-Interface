@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { filterItems, changeItem } from "../../state/actions";
 
+// ICONS
 import { FaSearch } from "react-icons/fa";
 
 const mapStateToProps = (state) => {
@@ -54,7 +55,7 @@ class SearchBar extends Component {
           type="text"
           name="search"
           placeholder="Search..."
-          className="w-full dark:text-white bg-green-50 dark:bg-gray-800 text-2xl px-5 focus:outline-none border-b-2 border-r-2 border-gray-400 border-solid h-full"
+          className="w-full dark:text-white bg-green-50 dark:bg-gray-800 text-2xl px-5 focus:outline-none border-b-2 border-r-2 border-gray-400 border-solid rounded-none h-full"
           onChange={(e) => this.handleType(e)}
           onFocus={(e) => (e.target.placeholder = "")}
           onBlur={(e) => (e.target.placeholder = "Search...")}

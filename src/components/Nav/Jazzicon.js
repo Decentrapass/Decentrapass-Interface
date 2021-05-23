@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 var jazzicon = require("jazzicon");
 
+// The Jazzicon module returns an HTMLElement that must be
+// injected directly into html, to make it simple we create an element that does this automatically
 export default class Jazzicon extends Component {
   constructor(props) {
     super(props);

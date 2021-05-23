@@ -23,8 +23,33 @@ class AddItemButton extends Component {
       open: false,
       redirect: null,
     };
+
+    this.wrapperRef = React.createRef();
+    this.handleClick = this.handleClick.bind(this);
   }
 
+  // Listen to clicks to close menu
+  componentDidMount() {
+    window.addEventListener("mousedown", this.handleClick.bind(this));
+  }
+
+  // Stop listening to clicks when unmounted
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClick.bind(this));
+  }
+
+  // Handles closing the menu when clicking outside
+  handleClick(e) {
+    if (
+      this.state.open &&
+      this.wrapperRef &&
+      !this.wrapperRef.current.contains(e.target)
+    ) {
+      this.setState({ open: false });
+    }
+  }
+
+  // Handles changing state depending on the add button clicked
   addItemClick = (e) => {
     let selectedItem = e.target.innerText;
     this.setState({ open: !this.state.open });
@@ -49,50 +74,52 @@ class AddItemButton extends Component {
 
   render() {
     return (
-      <div
-        className="h-full flex items-center justify-center relative"
-        onMouseEnter={() => this.setState({ open: true })}
-        onMouseLeave={() => this.setState({ open: false })}
-      >
+      <div className="h-full flex items-center justify-center">
         {this.state.redirect}
-        <button className="hover:bg-green-300 dark:hover:bg-gray-900 border-b-2 bg-green-50 dark:bg-gray-800 border-gray-400 px-4 py-2 text-gray-600 dark:text-gray-500 text-3xl focus:outline-none w-full h-full">
+
+        {/* Add item button */}
+        <button
+          className="hover:bg-green-300 dark:hover:bg-gray-900 border-b-2 bg-green-50 dark:bg-gray-800 border-gray-400 px-4 py-2 text-gray-600 dark:text-gray-500 text-3xl focus:outline-none w-full h-full"
+          onClick={() => this.setState({ open: true })}
+        >
           <IoMdAdd />
         </button>
+
+        {/* Add item popup */}
         <div
-          className="opacity-0 hidden absolute z-50 right-0 top-full"
-          style={this.state.open ? { opacity: "1", display: "flex" } : {}}
+          className="padding-3 bg-white dark:bg-gray-900 text-gray-800 dark:text-white border-2 rounded-xl rounded-tr-none border-gray-300 dark:border-gray-500 border-solid overflow-hidden w-64 absolute right-0 top-16"
+          style={this.state.open ? { display: "block" } : { display: "none" }}
+          ref={this.wrapperRef}
         >
-          <div className="padding-3 bg-white dark:bg-gray-900 text-gray-800 dark:text-white border-2 rounded-xl rounded-tr-none border-gray-300 dark:border-gray-500 border-solid overflow-hidden w-64">
-            <ul>
-              <li
-                onClick={this.addItemClick}
-                className="flex align-center w-full p-5 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer"
-              >
-                <span className="mr-2">
-                  <FaUserAlt />
-                </span>
-                Login
-              </li>
-              <li
-                onClick={this.addItemClick}
-                className="flex align-center w-full p-5 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer"
-              >
-                <span className="mr-2">
-                  <AiFillCreditCard />
-                </span>
-                Credit Card
-              </li>
-              <li
-                onClick={this.addItemClick}
-                className="flex align-center w-full p-5 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer"
-              >
-                <span className="mr-2">
-                  <CgNotes />
-                </span>
-                Secure Note
-              </li>
-            </ul>
-          </div>
+          <ul>
+            <li
+              onClick={this.addItemClick}
+              className="flex align-center w-full p-5 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer"
+            >
+              <span className="mr-2">
+                <FaUserAlt />
+              </span>
+              Login
+            </li>
+            <li
+              onClick={this.addItemClick}
+              className="flex align-center w-full p-5 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer"
+            >
+              <span className="mr-2">
+                <AiFillCreditCard />
+              </span>
+              Credit Card
+            </li>
+            <li
+              onClick={this.addItemClick}
+              className="flex align-center w-full p-5 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer"
+            >
+              <span className="mr-2">
+                <CgNotes />
+              </span>
+              Secure Note
+            </li>
+          </ul>
         </div>
       </div>
     );

@@ -17,23 +17,25 @@ class Unlocked extends Component {
     super(props);
     this.state = {
       redirect: null,
-      showRec: true,
-      showData: true,
+      showRec: true, // Handles view on mobile
+      showData: true, // Handles view on mobile
     };
 
     this.changeView = this.changeView.bind(this);
   }
 
   componentDidMount() {
+    // Only allow this page if logged in
     if (!this.props.loggedIn)
       this.setState({ redirect: <Redirect to="/login" /> });
 
-    if (window.innerWidth < 740) this.setState({ showData: false });
+    // If on mobile, only displayed recommended section
+    if (window.innerWidth < 768) this.setState({ showData: false });
   }
 
+  // Handles changing the view on mobile
   changeView() {
-    console.log(window.innerWidth);
-    if (window.innerWidth < 740) {
+    if (window.innerWidth < 768) {
       this.setState({ showData: !this.state.showData });
       this.setState({ showRec: !this.state.showRec });
     }

@@ -1,5 +1,8 @@
 import { Component } from "react";
 
+// FILE CONTAINS ALL TYPE OF INPUTS ACCORDING TO FIELD
+
+// Normal text field
 export class NormalField extends Component {
   state = {
     val: "",
@@ -26,6 +29,7 @@ export class NormalField extends Component {
   }
 }
 
+// Password field (show on focus hide on blur)
 export class HiddenField extends Component {
   state = {
     val: "",
@@ -52,6 +56,7 @@ export class HiddenField extends Component {
   }
 }
 
+// Big note field
 export class LargeField extends Component {
   state = {
     val: "",
@@ -77,6 +82,7 @@ export class LargeField extends Component {
   }
 }
 
+// For dates (ex: expiry card date)
 export class DateField extends Component {
   state = {
     text: "",
@@ -113,6 +119,7 @@ export class DateField extends Component {
   }
 }
 
+// Multiple options (ex: card type)
 export class SelectField extends Component {
   state = {
     options: null,

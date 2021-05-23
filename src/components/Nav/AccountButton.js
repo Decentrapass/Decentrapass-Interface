@@ -3,6 +3,9 @@ import React from "react";
 import { formatAccount } from "../../functions/format";
 import Jazzicon from "./Jazzicon";
 
+// Displays the users current account and provides an onClick event
+// to display pending transactions
+
 export default function AccountButton(props) {
   return (
     <button onClick={props.openMenu} className="flex focus:outline-none h-full">

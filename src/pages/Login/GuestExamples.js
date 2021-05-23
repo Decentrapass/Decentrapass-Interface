@@ -1,3 +1,4 @@
+// These are the default fields a user sees when logging on as guest
 export const GUEST_DATA = [
   {
     numId: 0,

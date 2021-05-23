@@ -1,6 +1,7 @@
 import { IF } from "../components/Constants/AddInterfaces";
 import { TYPES } from "../components/Constants/constants";
 
+// Adds the spaces to credit cards. EX: 0000 0000 0000 0000
 export const formatCard = (card) => {
   let result = "";
   for (let i = 0; i < card.length; i += 4) {
@@ -9,6 +10,7 @@ export const formatCard = (card) => {
   return result.substring(0, result.length - 1);
 };
 
+// Calls the contract and formats the received data into objects
 export async function formatData(numItems, contract, acc) {
   let arr = [];
   let count = 0;
@@ -19,6 +21,8 @@ export async function formatData(numItems, contract, acc) {
 
     if (itemData[1] != "") {
       let ipfsData;
+
+      // IPFS Gateway + saved hash in contract
       let url = "https://gateway.ipfs.io/ipfs/" + itemData[1];
 
       let res = await fetch(url);
@@ -32,6 +36,7 @@ export async function formatData(numItems, contract, acc) {
         type: TYPES[type],
       };
 
+      // Grabbing the corresponding interface for type
       let correspondingIF = Object.keys(IF[TYPES[type]]);
 
       for (let j = 0; j < receivedData.length; j++) {
@@ -45,6 +50,7 @@ export async function formatData(numItems, contract, acc) {
   return arr;
 }
 
+// Formats fields into an object to save in state (Add Item/Edit)
 export function formatItem(type, item, id, nextId) {
   let data = {
     numId: id,
@@ -61,6 +67,7 @@ export function formatItem(type, item, id, nextId) {
   return data;
 }
 
+// Joins all fields into a string separated by commas
 export function formatSend(data) {
   let str = "";
   for (const item of data) {
@@ -69,6 +76,7 @@ export function formatSend(data) {
   return str.substring(0, str.length - 1);
 }
 
+// Gets an account and returns 0x + n first numbers + "..." + n last numbers
 export function formatAccount(acc, n) {
   if (acc === "guest") return acc;
 

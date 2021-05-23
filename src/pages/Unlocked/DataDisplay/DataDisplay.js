@@ -3,16 +3,22 @@ import React, { Component } from "react";
 import LOGO from "../../../img/logo-nobg.png";
 import { IoIosArrowBack } from "react-icons/io";
 
+// Constants
 import {
   DATA_DISPLAY,
   LOGO_COLORS,
   SHOW_DATA,
 } from "../../../components/Constants/constants";
 
+// Components
 import NormalField from "./NormalField";
 import HiddenField from "./HiddenField";
 import LargeField from "./LargeField";
 import MediumField from "./MediumField";
+import { Redirect } from "react-router";
+import GuestTriedAction from "../../../components/Popups/GuestTriedAction";
+
+// Functions
 import { connect } from "react-redux";
 import {
   addItem,
@@ -21,8 +27,6 @@ import {
   saveItems,
   saveTx,
 } from "../../../state/actions";
-import { Redirect } from "react-router";
-import GuestTriedAction from "../../../components/Popups/GuestTriedAction";
 
 const mapStateToProps = (state) => {
   return {
@@ -53,12 +57,15 @@ class DataDisplay extends Component {
   }
 
   editHandler() {
+    // Redirect to edit page and save what item type we are editing
     this.props.addItem(this.props.currentItem.type);
     this.setState({ render: <Redirect to="/unlocked/edit" /> });
   }
 
   async deleteHandler() {
+    // Guests cant delete an item
     if (this.props.account !== "guest") {
+      // Call delete contract method and save tx to pending txs popup
       this.props.contract.methods
         .deleteObject(this.props.currentItem.id)
         .send({ from: this.props.account })
@@ -72,14 +79,18 @@ class DataDisplay extends Component {
       let newItems = this.props.items;
       let delPos;
 
+      // Delete previous item from state
       for (let i = 0; i < this.props.items.length; i++)
         if (this.props.items[i].numId === this.props.currentItem.numId)
           delPos = i;
 
       newItems.splice(delPos, 1);
+
+      // And save the edited one
       this.props.saveItems(newItems);
       this.props.changeItem(newItems[0]);
     } else {
+      // Display err popup when guest tried to delete
       this.setState({
         render: (
           <GuestTriedAction onClose={() => this.setState({ render: null })} />
@@ -124,6 +135,7 @@ class DataDisplay extends Component {
                 {displayItem.url && (
                   <a
                     href={
+                      // Manages url formatting
                       displayItem.url.includes("http")
                         ? displayItem.url
                         : "http://" + displayItem.url
@@ -132,7 +144,9 @@ class DataDisplay extends Component {
                     rel="noreferrer"
                   >
                     <span className="text-green-500 dark:text-green-600 text-lg hover:underline">
-                      {displayItem.url}
+                      {displayItem.url.includes("http")
+                        ? displayItem.url
+                        : "http://" + displayItem.url}
                     </span>
                   </a>
                 )}
@@ -186,12 +200,15 @@ class DataDisplay extends Component {
             </div>
           </div>
           <div className="flex w-full p-3 justify-between items-end z-10 text-lg">
+            {/* EDIT BUTTON */}
             <input
               type="submit"
               value="Edit"
               className="bg-gray-300 dark:bg-gray-500 py-1 px-3 rounded hover:bg-gray-400 dark:hover:bg-gray-400 cursor-pointer"
               onClick={() => this.editHandler()}
             />
+
+            {/* DELETE BUTTON */}
             <input
               type="submit"
               value="Delete"

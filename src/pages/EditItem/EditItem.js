@@ -1,14 +1,21 @@
 import React, { Component } from "react";
+
+// Functions
 import { connect } from "react-redux";
-import AddDataField from "../AddItem/DataCreate/AddDataField";
-import { IF } from "../../components/Constants/AddInterfaces";
 import { encrypt } from "../../functions/encryption";
 import { changeItem, saveItems, saveTx } from "../../state/actions";
-import { TYPES_INT } from "../../components/Constants/constants";
-import { Redirect } from "react-router";
 import { formatItem, formatSend } from "../../functions/format";
+
+// Components
+import AddDataField from "../AddItem/DataCreate/AddDataField";
+import { Redirect } from "react-router";
 import GuestTriedAction from "../../components/Popups/GuestTriedAction";
 
+// Constants
+import { IF } from "../../components/Constants/AddInterfaces";
+import { TYPES_INT } from "../../components/Constants/constants";
+
+// IPFS Connection
 const { create } = require("ipfs-http-client");
 const ipfs = create({
   host: "ipfs.infura.io",
@@ -46,6 +53,7 @@ class EditItem extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // Displays right fields filled with previous data
   componentDidMount() {
     var fields = IF[this.props.currentItem.type];
     var fieldsHtml = Object.keys(fields).map((el) => {
@@ -64,21 +72,27 @@ class EditItem extends Component {
     this.setState({ fields: fieldsHtml });
   }
 
+  // When user types > save parents state
   stateChanger(name, val) {
     if (name === "number") val.replace(/ /g, "");
     this.setState({ [name]: val }); // Saves input values on state
   }
 
   async handleSubmit() {
+    // Guests cant save items
     if (this.props.account !== "guest") {
+      // Get interface from type
       var fields = IF[this.props.currentItem.type];
+
       let type = TYPES_INT[this.props.currentItem.type];
       let data = [];
 
+      // Create an array with fields data
       for (const i of Object.keys(fields)) {
         data.push(this.state[i] || ""); // If null set to empty string (avoid errors)
       }
 
+      // Remove previous item from state and save edited one
       let prevItems = this.props.items;
       prevItems[this.props.currentItem.numId] = formatItem(
         type,
@@ -89,10 +103,12 @@ class EditItem extends Component {
       this.props.saveItems(prevItems);
       this.props.changeItem(prevItems[this.props.currentItem.numId]);
 
+      // Encrypt new data and send to IPFS
       let toSend = formatSend(encrypt(data, this.props.password));
 
       let res = await ipfs.add(toSend);
 
+      // Save IPFS response hash to contract
       this.props.contract.methods
         .editObject(this.props.currentItem.id, res.path)
         .send({ from: this.props.account })
@@ -105,7 +121,7 @@ class EditItem extends Component {
 
       this.setState({ render: <Redirect to="/unlocked" /> });
     } else {
-      console.log("yes");
+      // Display error popup when guest tried to save
       this.setState({
         render: (
           <GuestTriedAction onClose={() => this.setState({ render: null })} />
@@ -128,7 +144,7 @@ class EditItem extends Component {
                 className="bg-red-300 border-2 border-red-500 dark:border-red-600 dark:bg-red-800 py-2 w-48 hover:bg-red-500 dark:hover:bg-red-600 cursor-pointer text-xl"
                 onClick={() =>
                   this.setState({
-                    redirect: <Redirect to="/unlocked" />,
+                    render: <Redirect to="/unlocked" />,
                   })
                 }
               >

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+// Normal field displayed (copy and reveal button)
 export default class NormalField extends Component {
   constructor(props) {
     super(props);

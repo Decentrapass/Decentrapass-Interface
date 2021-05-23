@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 // ICONS
 import { IoMdClose } from "react-icons/io";
 import { FiExternalLink, FiCopy } from "react-icons/fi";
-
-import { formatAccount } from "../../functions/format";
 import Jazzicon from "../Nav/Jazzicon";
+
+// Changes account to 0x00...000
+import { formatAccount } from "../../functions/format";
 
 const mapStateToProps = (state) => {
   return {
@@ -15,6 +16,7 @@ const mapStateToProps = (state) => {
   };
 };
 
+// Displays pending txs
 function PendingTxs(props) {
   return (
     <div

@@ -1,3 +1,4 @@
+// The colors based on the letter
 export const LOGO_COLORS = [
   "#FF6633",
   "#FFB399",
@@ -37,12 +38,14 @@ export const SHOW_SEARCH = {
   note: [],
 };
 
+// Converts an int into its corresponding type
 export const TYPES = {
   0: "login",
   1: "card",
   2: "note",
 };
 
+// Converts a type into its corresponding int
 export const TYPES_INT = {
   login: 0,
   card: 1,

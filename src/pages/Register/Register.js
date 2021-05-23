@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
+// Functions
 import { hash } from "../../functions/encryption";
 import { saveLogin, saveTx } from "../../state/actions";
 
+// Icons
 import LogoNBG from "../../img/logo-nobg.png";
 
 const mapStateToProps = (state) => {
@@ -34,11 +36,13 @@ export class Register extends Component {
 
   async componentDidUpdate() {
     if (this.props.contract) {
+      // Guests cant register without connecting first
       if (this.props.contract === "guest") {
         this.setState({ redirect: <Redirect to="/login" /> });
         return;
       }
 
+      // Get password from contract and redirect to login if it exists
       let pass = await this.props.contract.methods
         .password(this.props.account)
         .call();
@@ -52,8 +56,10 @@ export class Register extends Component {
   async handleSubmit(e) {
     e.preventDefault();
 
+    // Hash typed password
     let pass = hash(this.state.pass, this.props.account);
 
+    // Save to contract and save txs to pending txs popup
     this.props.contract.methods
       .setPass(pass)
       .send({ from: this.props.account })

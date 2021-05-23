@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { IoClose } from "react-icons/io5";
+import WalletOption from "../Buttons/WalletOption";
 
+// If no web3 account is detected we either ask to connect one or
+// offer to try without one
 export default class ConnectAccount extends Component {
   render() {
     return (
@@ -21,17 +24,13 @@ export default class ConnectAccount extends Component {
             <h2 className="text-lg mb-3 font-black">
               1. Connect the Ethereum wallet of your choice
             </h2>
-            <button
-              className={
-                "rounded-xl border border-solid border-gray-300 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-500 dark:text-white p-4 focus:outline-none w-full" +
-                (this.props.failed
-                  ? " bg-red-400 dark:bg-red-700"
-                  : " bg-gray-200 dark:bg-gray-700")
-              }
-              onClick={() => this.props.connect()}
-            >
-              Metamask
-            </button>
+
+            {/* Available wallet options */}
+            <WalletOption
+              connect={this.props.connect}
+              option="Metamask"
+              failed={this.props.failed}
+            />
           </div>
           <div className="pt-7">
             <h2 className="text-lg mb-3 font-black">

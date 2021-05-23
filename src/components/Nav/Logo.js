@@ -2,6 +2,7 @@ import React from "react";
 
 import LOGO from "../../img/logo-nobg.png";
 
+// Logo displayed in the navigation bar
 export default function Logo() {
   return (
     <a
