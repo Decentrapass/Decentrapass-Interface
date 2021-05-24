@@ -165,21 +165,19 @@ export class Login extends Component {
               <label className="lg:text-lg text-green-700 dark:text-green-400">
                 User:
               </label>
-              <div className="flex items-center justify-between mb-3 bg-white dark:bg-gray-700 px-5 h-16 rounded w-full border-gray-300 dark:border-gray-700 border-2 border-solid rounded-0 lg:rounded text-lg lg:text-xl dark:text-gray-300">
+              <div className="flex items-center justify-between mb-3 bg-white dark:bg-gray-700 px-5 h-16 w-full border-gray-300 dark:border-gray-700 border-2 border-solid rounded-0 lg:rounded text-lg lg:text-xl dark:text-gray-300">
                 <div className="flex items-center font-mono">
                   <Jazzicon account={this.props.account} addedClasses="mr-1" />
                   {formatAccount(this.props.account, 4)}
                 </div>
-                <div className="flex flex-col items-end text-sm lg:text-sm">
+                <div className="flex lg:flex-col items-end text-base md:text-sm">
                   <a
                     href={"https://etherscan.io/address/" + this.props.account}
-                    className="text-gray-500 dark:text-gray-400 hover:underline flex mb-2"
+                    className="text-gray-500 dark:text-gray-400 hover:underline flex mx-2 md:mx-0 md:mb-2"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {window.innerWidth < 768 || window.innerWidth > 1024
-                      ? "View on Etherscan"
-                      : ""}
+                    {window.innerWidth > 1024 ? "View on Etherscan" : ""}
                     <FiExternalLink />
                   </a>
                   <span
@@ -188,9 +186,7 @@ export class Login extends Component {
                       navigator.clipboard.writeText(this.props.account)
                     }
                   >
-                    {window.innerWidth < 768 || window.innerWidth > 1024
-                      ? "Copy Address"
-                      : ""}
+                    {window.innerWidth > 1024 ? "Copy Address" : ""}
                     <FiCopy />
                   </span>
                 </div>
@@ -213,7 +209,7 @@ export class Login extends Component {
                 />
                 <button
                   type="submit"
-                  className="bg-green-500 border-green-500 py-3 px-4 rounded-r focus:outline-none flex items-center justify-center h-full"
+                  className="bg-green-500 border-green-500 py-3 px-4 lg:rounded-r focus:outline-none flex items-center justify-center h-full"
                 >
                   <img src={LogoNBG} className="h-full w-auto" />
                 </button>

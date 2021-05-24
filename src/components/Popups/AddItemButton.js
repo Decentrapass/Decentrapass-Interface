@@ -87,7 +87,7 @@ class AddItemButton extends Component {
 
         {/* Add item popup */}
         <div
-          className="padding-3 bg-white dark:bg-gray-900 text-gray-800 dark:text-white border-2 rounded-xl rounded-tr-none border-gray-300 dark:border-gray-500 border-solid overflow-hidden w-64 absolute right-0 top-16"
+          className="padding-3 bg-white dark:bg-gray-900 text-gray-800 dark:text-white border-2 rounded-xl rounded-tr-none border-gray-300 dark:border-gray-500 border-solid overflow-hidden w-64 absolute right-0 top-12 lg:top-16"
           style={this.state.open ? { display: "block" } : { display: "none" }}
           ref={this.wrapperRef}
         >
