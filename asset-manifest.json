@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Decentrapass-v1-Interface/static/css/main.468884fa.chunk.css",
-    "main.js": "/Decentrapass-v1-Interface/static/js/main.02666d34.chunk.js",
-    "main.js.map": "/Decentrapass-v1-Interface/static/js/main.02666d34.chunk.js.map",
+    "main.css": "/Decentrapass-v1-Interface/static/css/main.7a93b840.chunk.css",
+    "main.js": "/Decentrapass-v1-Interface/static/js/main.6e1dda55.chunk.js",
+    "main.js.map": "/Decentrapass-v1-Interface/static/js/main.6e1dda55.chunk.js.map",
     "runtime-main.js": "/Decentrapass-v1-Interface/static/js/runtime-main.7b51c630.js",
     "runtime-main.js.map": "/Decentrapass-v1-Interface/static/js/runtime-main.7b51c630.js.map",
     "static/js/2.56584e44.chunk.js": "/Decentrapass-v1-Interface/static/js/2.56584e44.chunk.js",
     "static/js/2.56584e44.chunk.js.map": "/Decentrapass-v1-Interface/static/js/2.56584e44.chunk.js.map",
     "index.html": "/Decentrapass-v1-Interface/index.html",
-    "static/css/main.468884fa.chunk.css.map": "/Decentrapass-v1-Interface/static/css/main.468884fa.chunk.css.map",
+    "static/css/main.7a93b840.chunk.css.map": "/Decentrapass-v1-Interface/static/css/main.7a93b840.chunk.css.map",
     "static/js/2.56584e44.chunk.js.LICENSE.txt": "/Decentrapass-v1-Interface/static/js/2.56584e44.chunk.js.LICENSE.txt",
     "static/media/MetamaskAccept.7b3a0505.png": "/Decentrapass-v1-Interface/static/media/MetamaskAccept.7b3a0505.png",
     "static/media/MetamaskInterface.f5bbca72.jpg": "/Decentrapass-v1-Interface/static/media/MetamaskInterface.f5bbca72.jpg",
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.7b51c630.js",
     "static/js/2.56584e44.chunk.js",
-    "static/css/main.468884fa.chunk.css",
-    "static/js/main.02666d34.chunk.js"
+    "static/css/main.7a93b840.chunk.css",
+    "static/js/main.6e1dda55.chunk.js"
   ]
 }
