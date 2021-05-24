@@ -4,11 +4,12 @@ import React, { Component } from "react";
 import { FiCode, FiLogOut } from "react-icons/fi";
 import { HiOutlineBookOpen } from "react-icons/hi";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import { deleteCookie } from "../../functions/cookies";
 
 export default class OtherMenu extends Component {
   // Handles the log out
   logoutRequest() {
-    localStorage.removeItem("localSession");
+    deleteCookie("SESSION");
     window.location.reload();
   }
 

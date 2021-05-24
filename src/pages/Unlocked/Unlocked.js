@@ -43,7 +43,7 @@ class Unlocked extends Component {
 
   render() {
     return (
-      <div className="flex flex-col w-screen lg:w-full h-full justify-center items-center">
+      <div className="flex flex-col w-screen md:w-full h-full justify-center items-center">
         {this.state.redirect}
         <Nav connect={this.props.connect} />
         <div className="flex h-full w-screen relative overflow-hidden">

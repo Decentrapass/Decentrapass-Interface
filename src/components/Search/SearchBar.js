@@ -50,17 +50,17 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="w-full h-full relative overflow-hidden">
+      <div className="w-full h-full relative overflow-hidden flex items-center justify-center">
         <input
           type="text"
           name="search"
           placeholder="Search..."
-          className="w-full dark:text-white bg-green-50 dark:bg-gray-800 text-2xl px-5 focus:outline-none border-b-2 border-r-2 border-gray-400 border-solid rounded-none h-full"
+          className="w-full dark:text-white bg-green-50 dark:bg-gray-800 text-lg lg:text-2xl px-5 focus:outline-none border-b-2 border-r-2 border-gray-400 border-solid rounded-none h-full placeholder-gray-400 dark:placeholder-gray-600"
           onChange={(e) => this.handleType(e)}
           onFocus={(e) => (e.target.placeholder = "")}
           onBlur={(e) => (e.target.placeholder = "Search...")}
         />
-        <FaSearch className="absolute top-1/2 right-5 transform -translate-y-1/2 text-2xl text-gray-500" />
+        <FaSearch className="absolute top-1/2 right-2 lg:right-5 transform -translate-y-1/2 text-sm lg:text-2xl text-gray-500" />
       </div>
     );
   }

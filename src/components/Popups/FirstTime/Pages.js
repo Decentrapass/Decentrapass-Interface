@@ -112,7 +112,7 @@ export function Page4() {
         be storing your hashed password (using PBKDF2 5,000 times), so you will
         need to accept the transaction request.
       </p>
-      <img src={MetamaskRegister} className="h-52 lg:h-64  xl:h-72 2xl:h-96" />
+      <img src={MetamaskRegister} className="h-40 lg:h-52  xl:h-72 2xl:h-96" />
     </div>
   );
 }

@@ -16,12 +16,12 @@ export default class LargeField extends Component {
   render() {
     return (
       <div
-        className="data-field flex w-full items-center border-t border-solid bg-white border-gray-300 dark:border-gray-700 h-48 cursor-pointer relative"
+        className="data-field flex w-full items-center border-t border-solid bg-white border-gray-300 dark:border-gray-700 lg:h-48 md:h-42 h-48 cursor-pointer relative"
         style={this.props.first ? { border: "0 none" } : {}}
       >
         <div className="flex flex-col justify-start h-full w-full p-4 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-900">
           <span className="text-green-600 text-sm">{this.props.fieldName}</span>
-          <div className="text-lg dark:text-white overflow-y-auto">
+          <div className="text-base lg:text-lg dark:text-white overflow-y-auto">
             {this.props.fieldValue}
           </div>
         </div>

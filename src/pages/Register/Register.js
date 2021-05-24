@@ -5,10 +5,15 @@ import { Redirect } from "react-router-dom";
 // Functions
 import { hash } from "../../functions/encryption";
 import { saveLogin, saveTx } from "../../state/actions";
+import { formatAccount } from "../../functions/format";
+import { setCookie } from "../../functions/cookies";
 
 // Icons
-import LogoNBG from "../../img/logo-nobg.png";
-import { setCookie } from "../../functions/cookies";
+import { FiExternalLink, FiCopy } from "react-icons/fi";
+
+// Components
+import Jazzicon from "../../components/Nav/Jazzicon";
+import PassDifficultyBar from "./PassDifficultyBar";
 
 const mapStateToProps = (state) => {
   return {
@@ -30,6 +35,7 @@ export class Register extends Component {
     this.state = {
       pass: "",
       redirect: null,
+      rememberPass: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -72,7 +78,7 @@ export class Register extends Component {
       );
 
     this.props.saveLogin(true);
-    setCookie("SESSION", pass, 1);
+    if (this.state.rememberPass) setCookie("SESSION", pass, 1);
     this.setState({ redirect: <Redirect to="/unlocked" /> });
   }
 
@@ -81,24 +87,23 @@ export class Register extends Component {
       <>
         {this.state.redirect}
         <div className="flex flex-col items-center justify-center w-full h-full">
-          <div className="flex flex-col lg:flex-row w-11/12 lg:w-1/2 items-center justify-center">
-            <div className="h-full flex flex-col border-4 border-solid bg-green-200 dark:bg-gray-700 border-green-200 dark:border-gray-700 p-5 lg:px-10  border-r-0 dark:text-white lg:w-1/2 order-last lg:order-first">
-              <h1 className="font-black text-3xl">Register</h1>
-              <p className="leading-relaxed mt-3">
+          <div className="flex flex-col md:flex-row w-11/12 lg:w-3/4 xl:w-2/3 2xl:w-1/2 shadow-xl overflow-y-auto h-4/5 md:h-auto border-4 border-solid  border-gray-200 dark:border-gray-700">
+            <div className="h-full flex flex-col justify-center bg-gray-200 dark:bg-gray-700 p-5 lg:px-10 border-r-0 dark:text-gray-300 md:w-1/2 order-last md:order-first">
+              <h1 className="font-black text-2xl md:text-3xl">Register</h1>
+              <p className="leading-relaxed mt-3 text-sm md:text-base">
                 Enter a new password that will be used to confirm your identity
                 and decrypt your passwords. Make sure to save this url (
-                <a href="http://decentrapass.com" className="text-blue-500">
-                  decentrapass.com
+                <a href="http://decentrapass.org" className="text-blue-500">
+                  decentrapass.org
                 </a>
                 ) to your bookmarks to avoid being phished in the future.
               </p>
-              <p className="leading-relaxed mt-3">
+              <p className="leading-relaxed mt-3 text-sm md:text-base">
                 The password will be the only thing you will need to remember to
                 log in. Make it as hard as possible and avoid saving it in the
-                internet or losing it, since it can't be changed when lost (due
-                to the nature of cyphering).
+                internet or losing it, since it can't be changed.
               </p>
-              <p className="leading-relaxed mt-3">
+              <p className="leading-relaxed mt-3 text-sm md:text-base">
                 Read more about our recommendations{" "}
                 <a href="" className="text-blue-500">
                   here
@@ -106,27 +111,73 @@ export class Register extends Component {
               </p>
             </div>
             <form
-              className="h-full flex flex-col items-center justify-center form border-4 border-solid border-green-200 dark:border-gray-700 p-5 lg:w-1/2 order-first lg:order-last"
+              className="h-full flex flex-col items-start justify-center form p-5 md:w-1/2 order-first md:order-last"
               onSubmit={this.handleSubmit}
             >
-              <div className="flex h-16">
+              <label className="lg:text-lg text-green-700 dark:text-green-400">
+                User:
+              </label>
+              <div className="flex items-center justify-between mb-3 bg-white dark:bg-gray-700 px-3 md:px-5 h-10 md:h-16 w-full border-gray-300 dark:border-gray-700 border-2 border-solid rounded-0 lg:rounded text-base md:text-lg lg:text-xl dark:text-gray-300">
+                <div className="flex items-center font-mono">
+                  <Jazzicon account={this.props.account} addedClasses="mr-1" />
+                  {formatAccount(this.props.account, 4)}
+                </div>
+                <div className="flex lg:flex-col items-end text-base md:text-sm">
+                  <a
+                    href={"https://etherscan.io/address/" + this.props.account}
+                    className="text-gray-500 dark:text-gray-400 hover:underline flex mx-2 md:mx-0 md:mb-2"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {window.innerWidth > 1024 ? "View on Etherscan" : ""}
+                    <FiExternalLink />
+                  </a>
+                  <span
+                    className="text-gray-500 dark:text-gray-400 hover:underline flex cursor-pointer"
+                    onClick={() =>
+                      navigator.clipboard.writeText(this.props.account)
+                    }
+                  >
+                    {window.innerWidth > 1024 ? "Copy Address" : ""}
+                    <FiCopy />
+                  </span>
+                </div>
+              </div>
+              <label className="lg:text-lg text-green-700 dark:text-green-400">
+                Password:
+              </label>
+              <div className="flex h-10 md:h-16 w-full">
                 <input
                   id="unlock-input"
                   type="password"
-                  className="w-full border-2 border-solid dark:text-white bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-700 text-xl lg:text-2xl px-5 py-3 focus:outline-none focus:border-blue-500 dark:focus:outline-none dark:focus:border-blue-500 rounded-l"
-                  placeholder="New password..."
+                  className="w-full h-full border-2 border-solid dark:text-gray-300 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-700 text-lg md:text-xl lg:text-2xl px-3 md:px-5 py-3 focus:outline-none focus:border-green-500 dark:focus:outline-none dark:focus:border-green-500 rounded-0 lg:rounded placeholder-gray-300 dark:placeholder-gray-500"
+                  placeholder="Type here..."
                   onChange={(e) => {
                     this.setState({ pass: e.target.value });
                   }}
                   autoFocus
                 />
-                <button
-                  type="submit"
-                  className="bg-green-500 border-green-500 py-3 px-4 rounded-r focus:outline-none flex items-center justify-center h-full"
-                >
-                  <img src={LogoNBG} className="h-full" />
-                </button>
               </div>
+              <PassDifficultyBar pass={this.state.pass} />
+              <div className="flex items-center mt-3 text-gray-700 dark:text-gray-400">
+                <input
+                  type="checkbox"
+                  onChange={(e) =>
+                    this.setState({ rememberPass: !this.state.rememberPass })
+                  }
+                  className="mr-1 w-4 h-4"
+                  id="rememberMeReg"
+                />
+                <label htmlFor="rememberMeReg" className="cursor-pointer">
+                  Keep me logged in for 1h
+                </label>
+              </div>
+              <button
+                type="submit"
+                className="bg-green-500 dark:bg-green-800 py-5 px-4 rounded-0 lg:rounded focus:outline-none flex items-center justify-center h-10 md:h-16 mt-4 w-full text-base md:text-xl dark:text-gray-300 transform hover:scale-105 dark:hover:bg-green-600 hover:bg-green-700 transition-transform tansition-colors"
+              >
+                Register
+              </button>
             </form>
           </div>
         </div>

@@ -104,7 +104,7 @@ class DataDisplay extends Component {
     if (displayItem)
       return (
         <div
-          className="w-full absolute lg:static lg:w-3/4 h-full dark:text-white bg-green-50 dark:bg-gray-800 flex flex-col justify-between items-center transition-transform"
+          className="w-full absolute md:static md:w-3/4 h-full dark:text-white bg-green-50 dark:bg-gray-800 flex flex-col justify-between items-center transition-transform"
           style={
             !this.props.show
               ? { transform: "translateX(100%)" }
@@ -114,15 +114,15 @@ class DataDisplay extends Component {
           {this.state.render}
           <div className="flex flex-col items-center w-full">
             <button
-              className="p-3 text-green-500 flex w-full lg:hidden items-end"
+              className="p-3 text-green-500 flex w-full md:hidden items-end"
               onClick={this.props.changeView}
             >
               <IoIosArrowBack className="text-lg" />
               <span>back</span>
             </button>
-            <div className="flex items-center mb-4 w-full p-4">
+            <div className="flex items-center lg:mb-4 w-full p-4">
               <div
-                className="w-16 h-16 flex items-center justify-center dark:text-white font-bold text-3xl uppercase rounded"
+                className="w-12 lg:w-16 h-12 lg:h-16 flex items-center justify-center dark:text-white font-bold text-3xl uppercase rounded"
                 style={{
                   backgroundColor:
                     LOGO_COLORS[displayItem.title.charCodeAt(0) % 26],
@@ -131,7 +131,7 @@ class DataDisplay extends Component {
                 <span>{displayItem.title.charAt(0)}</span>
               </div>
               <div className="flex flex-col ml-3">
-                <h1 className="text-2xl">{displayItem.title}</h1>
+                <h1 className="text-xl lg:text-2xl">{displayItem.title}</h1>
                 {displayItem.url && (
                   <a
                     href={
@@ -143,7 +143,7 @@ class DataDisplay extends Component {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <span className="text-green-500 dark:text-green-600 text-lg hover:underline">
+                    <span className="text-green-500 dark:text-green-600 text-base lg:text-lg hover:underline">
                       {displayItem.url.includes("http")
                         ? displayItem.url
                         : "http://" + displayItem.url}

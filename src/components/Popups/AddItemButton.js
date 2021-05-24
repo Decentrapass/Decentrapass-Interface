@@ -79,7 +79,7 @@ class AddItemButton extends Component {
 
         {/* Add item button */}
         <button
-          className="hover:bg-green-300 dark:hover:bg-gray-900 border-b-2 bg-green-50 dark:bg-gray-800 border-gray-400 px-4 py-2 text-gray-600 dark:text-gray-500 text-3xl focus:outline-none w-full h-full"
+          className="hover:bg-gray-300 dark:hover:bg-gray-900 border-b-2 bg-green-50 dark:bg-gray-800 border-gray-400 px-2 lg:px-4 py-2 text-gray-600 dark:text-gray-500 text-3xl focus:outline-none w-full h-full"
           onClick={() => this.setState({ open: true })}
         >
           <IoMdAdd />

@@ -68,7 +68,7 @@ class SearchItem extends Component {
         id={"recommendedItem" + this.props.itemId}
       >
         <div
-          className="w-12 h-12 flex items-center justify-center dark:text-white font-bold text-2xl uppercase rounded"
+          className="w-10 lg:w-12 h-10 lg:h-12 flex items-center justify-center dark:text-white font-bold text-xl lg:text-2xl uppercase rounded"
           style={{
             // Random color based on first letter
             backgroundColor: LOGO_COLORS[this.props.title.charCodeAt(0) % 26],
@@ -77,7 +77,9 @@ class SearchItem extends Component {
           <span>{this.props.title.charAt(0)}</span>
         </div>
         <div className="flex flex-col justify-center ml-2">
-          <h2 className="dark:text-white text-xl">{this.props.title}</h2>
+          <h2 className="dark:text-white text-base lg:text-xl">
+            {this.props.title}
+          </h2>
           <span className="text-gray-700 dark:text-gray-200 text-md">
             {show}
           </span>

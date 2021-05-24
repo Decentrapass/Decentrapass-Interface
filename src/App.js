@@ -159,7 +159,7 @@ class App extends Component {
         {this.state.isFirstTime && (
           <FirstTime closeMenu={() => this.setState({ isFirstTime: false })} />
         )}
-        {this.state.showPopup && (
+        {!this.state.isFirstTime && this.state.showPopup && (
           <ConnectAccount
             connect={this.connect}
             noWallet={this.noWallet}

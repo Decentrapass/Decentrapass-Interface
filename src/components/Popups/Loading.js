@@ -8,8 +8,18 @@ class Loading extends Component {
   }
   render() {
     return (
-      <div className="w-full h-full absolute top-0 left-0 bg-green-500 dark:bg-gray-900 flex justify-center items-center z-40">
+      <div className="w-full h-full absolute top-0 left-0 bg-green-200 dark:bg-gray-900 flex flex-col justify-center items-center z-40">
         <div className="spinner"></div>
+        <h1 className="text-xl mt-3 dark:text-white">Loading...</h1>
+        <p className="text-base mt-6 dark:text-white">
+          Did the page get stuck?{" "}
+          <span
+            className="text-green-800 dark:text-green-500 cursor-pointer hover:underline py-5 font-black"
+            onClick={() => window.location.reload()}
+          >
+            Reload!
+          </span>
+        </p>
       </div>
     );
   }

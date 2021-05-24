@@ -19,7 +19,7 @@ export default class NormalField extends Component {
   render() {
     return (
       <div
-        className="data-field flex w-full items-center border-t border-solid bg-white border-gray-300 dark:border-gray-700 h-16 cursor-pointer relative"
+        className="data-field flex w-full items-center border-t border-solid bg-white border-gray-300 dark:border-gray-700 lg:h-16 md:h-12 h-16 cursor-pointer relative"
         style={this.props.first ? { border: "0 none" } : {}}
       >
         <div className="flex flex-col justify-center h-full w-full px-4 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-900">
@@ -27,7 +27,7 @@ export default class NormalField extends Component {
             {this.props.fieldName}
           </span>
           <span
-            className="text-lg dark:text-white h-2/4"
+            className="text-base lg:text-lg dark:text-white h-2/4"
             style={
               // Decides if password is hidden
               !this.state.revealed ? { WebkitTextSecurity: "disc" } : {}
