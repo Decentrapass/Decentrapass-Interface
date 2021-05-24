@@ -75,15 +75,12 @@ class App extends Component {
     const contract = new web3.eth.Contract(TOKEN_ABI, TOKEN_ADDRESS);
     const accounts = await web3.eth.getAccounts();
 
-    const password = await contract.methods.password(accounts[0]).call();
-
     window.ethereum.on("accountsChanged", () => window.location.reload());
     window.ethereum.on("chainChanged", () => window.location.reload());
     window.ethereum.on("connect", () => window.location.reload());
     window.ethereum.on("disconnect", () => window.location.reload());
 
     this.props.changeAccount(accounts[0]);
-    this.props.savePassword(password);
     this.props.saveContract(contract);
     this.props.saveWeb3(web3);
   }

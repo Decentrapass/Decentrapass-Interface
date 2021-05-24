@@ -4,7 +4,7 @@ import { formatCard } from "./format";
 var CryptoJS = require("crypto-js");
 
 // One way hashing for the password
-export function hash(pass, acc) {
+export function hash(pass, acc, n) {
   pass = CryptoJS.enc.Base64.parse(pass);
   acc = CryptoJS.enc.Base64.parse(acc);
 
@@ -14,7 +14,7 @@ export function hash(pass, acc) {
   // We use pbkdf 5k times (might change in the future)
   let pbkdf2 = CryptoJS.PBKDF2(comb, acc, {
     keySize: 512 / 32,
-    iterations: 5000,
+    iterations: n,
   });
 
   return CryptoJS.enc.Hex.stringify(pbkdf2);

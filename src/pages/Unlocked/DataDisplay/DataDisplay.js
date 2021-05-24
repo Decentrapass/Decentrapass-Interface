@@ -219,7 +219,14 @@ class DataDisplay extends Component {
         </div>
       );
     return (
-      <div className="data flex items-center justify-center w-3/4 h-full">
+      <div
+        className="w-full absolute md:static md:w-3/4 h-full dark:text-white bg-green-50 dark:bg-gray-800 flex justify-center items-center transition-transform"
+        style={
+          !this.props.show
+            ? { transform: "translateX(100%)" }
+            : { transform: "translateX(0)" }
+        }
+      >
         <div className="w-32 h-32 flex items-center justify-center bg-green-500 rounded-full opacity-30">
           <img src={LOGO} className="h-2/3" />
         </div>

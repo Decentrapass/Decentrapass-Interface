@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 
 // Functions
 import { hash } from "../../functions/encryption";
-import { saveLogin, saveTx } from "../../state/actions";
+import { saveLogin, savePassword, saveTx } from "../../state/actions";
 import { formatAccount } from "../../functions/format";
 import { setCookie } from "../../functions/cookies";
 
@@ -26,6 +26,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     saveLogin: (bool) => dispatch(saveLogin(bool)),
     saveTx: (tx) => dispatch(saveTx(tx)),
+    savePassword: (pass) => dispatch(savePassword(pass)),
   };
 };
 
@@ -64,11 +65,12 @@ export class Register extends Component {
     e.preventDefault();
 
     // Hash typed password
-    let pass = hash(this.state.pass, this.props.account);
+    let passSend = hash(this.state.pass, this.props.account, 10000);
+    let passSave = hash(this.state.pass, this.props.account, 5000);
 
     // Save to contract and save txs to pending txs popup
     this.props.contract.methods
-      .setPass(pass)
+      .setPass(passSend)
       .send({ from: this.props.account })
       .on(
         "transactionHash",
@@ -77,8 +79,10 @@ export class Register extends Component {
         }.bind(this)
       );
 
+    this.props.savePassword(passSave);
     this.props.saveLogin(true);
-    if (this.state.rememberPass) setCookie("SESSION", pass, 1);
+    if (this.state.rememberPass)
+      setCookie("SESSION", this.props.account + "," + passSave, 1);
     this.setState({ redirect: <Redirect to="/unlocked" /> });
   }
 

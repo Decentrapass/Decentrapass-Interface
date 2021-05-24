@@ -13,7 +13,13 @@ import Jazzicon from "../../components/Nav/Jazzicon";
 // Functions
 import { decrypt, hash } from "../../functions/encryption";
 import { formatAccount, formatData } from "../../functions/format";
-import { saveItems, changeItem, saveLogin, loading } from "../../state/actions";
+import {
+  saveItems,
+  changeItem,
+  saveLogin,
+  loading,
+  savePassword,
+} from "../../state/actions";
 import { deleteCookie, getCookie, setCookie } from "../../functions/cookies";
 
 const mapDispatchToProps = (dispatch) => {
@@ -22,6 +28,7 @@ const mapDispatchToProps = (dispatch) => {
     changeItem: (item) => dispatch(changeItem(item)),
     saveLogin: (page) => dispatch(saveLogin(page)),
     loading: (bool) => dispatch(loading(bool)),
+    savePassword: (pass) => dispatch(savePassword(pass)),
   };
 };
 
@@ -67,36 +74,36 @@ export class Login extends Component {
           this.setState({ redirect: <Redirect to="/register" /> });
         }
 
+        if (getCookie("SESSION").split(",")[0] !== this.props.account) {
+          deleteCookie("SESSION");
+        }
+
         // Automatic login
         if (getCookie("SESSION").length > 0) {
           // Stored hashed password in local storage
-          let passLS = getCookie("SESSION");
+          let passLS = getCookie("SESSION").split(",")[1];
 
           // If the cookie has the wrong password we delete the session
-          if (passLS != pass) {
-            deleteCookie("SESSION");
-            this.props.loading(false);
-          } else {
-            let numItems = await this.props.contract.methods
-              .numObjects(this.props.account)
-              .call();
+          let numItems = await this.props.contract.methods
+            .numObjects(this.props.account)
+            .call();
 
-            let dataToSave = await formatData(
-              numItems,
-              this.props.contract.methods,
-              this.props.account
-            );
+          let dataToSave = await formatData(
+            numItems,
+            this.props.contract.methods,
+            this.props.account
+          );
 
-            // Decrypt contract data
-            dataToSave = decrypt(dataToSave, pass);
+          // Decrypt contract data
+          dataToSave = decrypt(dataToSave, passLS);
 
-            // Save all data to state
-            this.props.saveItems(dataToSave);
-            this.props.changeItem(dataToSave[0]);
-            this.props.saveLogin(true);
-            this.props.loading(false);
-            this.setState({ redirect: <Redirect to="/unlocked" /> });
-          }
+          // Save all data to state
+          this.props.saveItems(dataToSave);
+          this.props.changeItem(dataToSave[0]);
+          this.props.saveLogin(true);
+          this.props.loading(false);
+          this.props.savePassword(passLS);
+          this.setState({ redirect: <Redirect to="/unlocked" /> });
         } else this.props.loading(false);
       } else this.props.loading(false);
     } else this.props.loading(false);
@@ -104,12 +111,15 @@ export class Login extends Component {
 
   async handleSubmit(e) {
     e.preventDefault();
-    let pass;
+    let passSend;
+    let passSave;
     let dataToSave;
+    let contractPass;
 
     // If the contract is for guest then we skip validation
     if (this.props.contract !== "guest") {
-      pass = hash(this.state.pass, this.props.account);
+      passSend = hash(this.state.pass, this.props.account, 10000);
+      passSave = hash(this.state.pass, this.props.account, 5000);
 
       let numItems = await this.props.contract.methods
         .numObjects(this.props.account)
@@ -121,20 +131,28 @@ export class Login extends Component {
         this.props.account
       );
 
-      dataToSave = decrypt(dataToSave, pass);
+      dataToSave = decrypt(dataToSave, passSave);
+
+      contractPass = await this.props.contract.methods
+        .password(this.props.account)
+        .call();
     } else {
       dataToSave = GUEST_DATA;
-      pass = this.state.pass;
+      passSend = this.state.pass;
+      passSave = this.state.pass;
+      contractPass = "1234";
     }
 
-    if (this.props.password === pass) {
+    if (contractPass === passSend) {
       this.props.saveItems(dataToSave);
       this.props.changeItem(dataToSave[0]);
       this.props.saveLogin(true);
+      this.props.savePassword(passSave);
       this.setState({ redirect: <Redirect to="/unlocked" /> });
 
       // Saving last user login cookie
-      if (this.state.rememberPass) setCookie("SESSION", pass, 1);
+      if (this.state.rememberPass)
+        setCookie("SESSION", this.props.account + "," + passSave, 1);
     } else {
       this.props.saveLogin(false);
       this.setState({ wrongPass: true });

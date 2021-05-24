@@ -35,7 +35,7 @@ export default function PassDifficultyBar(props) {
           style={{ width: (100 * strength) / 5 + "%", backgroundColor: color }}
         ></div>
       </div>
-      <span className="mt-2" style={{ color: color }}>
+      <span className="mt-2 font-bold" style={{ color: color }}>
         {text}
       </span>
     </div>
