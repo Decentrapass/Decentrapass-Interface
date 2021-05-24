@@ -30,7 +30,7 @@ class Recommended extends Component {
           <SearchBar />
           <AddItemButton />
         </div>
-        <div className="w-full cursor-pointer overflow-y-hidden mt-3">
+        <div className="w-full h-full cursor-pointer overflow-y-scroll mt-3">
           {this.props.displayedItems.map((item, key) => {
             // Choosing the most relevant info to show in the recommended section
             let chosenKey = "";

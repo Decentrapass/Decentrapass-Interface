@@ -153,7 +153,10 @@ class AddItem extends Component {
               {/* SAVE BUTTON */}
               <button
                 className="w-48 py-2 bg-green-300 border-2 border-green-500 dark:border-green-600 dark:bg-green-800 hover:bg-green-500 dark:hover:bg-green-600 text-xl text-white"
-                onClick={this.handleSubmit}
+                onClick={(e) => {
+                  e.target.setAttribute("disabled", "disabled");
+                  this.handleSubmit();
+                }}
               >
                 Save
               </button>
