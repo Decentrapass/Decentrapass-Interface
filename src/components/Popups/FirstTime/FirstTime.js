@@ -77,12 +77,14 @@ export default class FirstTime extends Component {
   render() {
     return (
       <div className="absolute top-0 left-0 w-full h-full z-100 bg-black bg-opacity-60 flex items-center justify-center">
-        <div className="w-11/12 lg:w-1/2 2xl:w-1/3 bg-gray-300 h-2/3 lg:h-3/4 dark:bg-gray-800 pt-3 rounded flex flex-col justify-between items-center dark:text-white relative overflow-hidden">
+        <div className="w-11/12 lg:w-1/2 2xl:w-1/3 bg-gray-300 h-5/6 sm:h-2/3 lg:h-3/4 dark:bg-gray-800 pt-3 rounded flex flex-col justify-between items-center dark:text-white relative overflow-hidden">
           <div className="w-full text-center text-gray-700 dark:text-gray-400">
             Instructions
           </div>
-          <div className="h-full flex items-start">{this.state.render}</div>
-          <div className="w-full flex items-center justify-between p-3">
+          <div className="h-5/6 flex items-start overflow-hidden">
+            {this.state.render}
+          </div>
+          <div className="w-full flex items-center justify-between p-3 text-sm sm:text-base">
             <button
               className="flex items-center justify-start focus:outline-none p-3 w-1/3 lg:w-1/4 xl:w-1/6"
               onClick={this.prevPage}
@@ -103,7 +105,7 @@ export default class FirstTime extends Component {
             )}
             {this.state.page == 5 && (
               <button
-                className="flex items-center justify-center focus:outline-none bg-green-500 p-3 rounded w-1/3 lg:w-1/4 xl:w-1/6"
+                className="flex items-center justify-center focus:outline-none bg-green-500 p-2 sm:p-3 rounded w-1/3 lg:w-1/4 xl:w-1/6"
                 onClick={this.saveCookie}
               >
                 <span>Finish</span>

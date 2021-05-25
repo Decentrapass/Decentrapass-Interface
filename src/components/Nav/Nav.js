@@ -43,6 +43,7 @@ class Nav extends Component {
     if (
       this.state.showOther &&
       this.wrapperRef &&
+      this.wrapperRef.current &&
       !this.wrapperRef.current.contains(e.target)
     ) {
       this.setState({ showOther: false });

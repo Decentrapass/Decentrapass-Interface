@@ -43,6 +43,7 @@ class AddItemButton extends Component {
     if (
       this.state.open &&
       this.wrapperRef &&
+      this.wrapperRef.current &&
       !this.wrapperRef.current.contains(e.target)
     ) {
       this.setState({ open: false });
