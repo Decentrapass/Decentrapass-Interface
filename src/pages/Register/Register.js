@@ -10,6 +10,7 @@ import { setCookie } from "../../functions/cookies";
 
 // Icons
 import { FiExternalLink, FiCopy } from "react-icons/fi";
+import { MdDone } from "react-icons/md";
 
 // Components
 import Jazzicon from "../../components/Nav/Jazzicon";
@@ -37,9 +38,11 @@ export class Register extends Component {
       pass: "",
       redirect: null,
       rememberPass: false,
+      copyText: <FiCopy />,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.copyText = this.copyText.bind(this);
   }
 
   async componentDidUpdate() {
@@ -86,6 +89,24 @@ export class Register extends Component {
     this.setState({ redirect: <Redirect to="/unlocked" /> });
   }
 
+  copyText() {
+    // Copys data to clipboard
+    this.setState({
+      copyText: <MdDone />,
+    });
+
+    navigator.clipboard.writeText(this.props.account);
+
+    setTimeout(
+      function () {
+        this.setState({
+          copyText: <FiCopy />,
+        });
+      }.bind(this),
+      800
+    );
+  }
+
   render() {
     return (
       <>
@@ -129,7 +150,7 @@ export class Register extends Component {
                 <div className="flex lg:flex-col items-end text-base md:text-sm">
                   <a
                     href={"https://etherscan.io/address/" + this.props.account}
-                    className="text-gray-500 dark:text-gray-400 hover:underline flex mx-2 md:mx-0 md:mb-2"
+                    className="text-gray-500 dark:text-gray-400 hover:underline flex mx-2 md:mx-0 md:mb-2 items-center gap-1"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -137,13 +158,11 @@ export class Register extends Component {
                     <FiExternalLink />
                   </a>
                   <span
-                    className="text-gray-500 dark:text-gray-400 hover:underline flex cursor-pointer"
-                    onClick={() =>
-                      navigator.clipboard.writeText(this.props.account)
-                    }
+                    className="text-gray-500 dark:text-gray-400 hover:underline flex cursor-pointer items-center gap-1"
+                    onClick={this.copyText}
                   >
                     {window.innerWidth > 1024 ? "Copy Address" : ""}
-                    <FiCopy />
+                    {this.state.copyText}
                   </span>
                 </div>
               </div>

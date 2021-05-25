@@ -67,7 +67,6 @@ class PendingTxs extends Component {
   }
 
   componentDidMount() {
-    console.log("E", this.props.account);
     this.setState({ isGuest: this.props.account === "guest" });
     document.addEventListener("mousedown", this.handleClickOutside.bind(this));
   }
