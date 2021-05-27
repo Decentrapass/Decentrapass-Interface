@@ -53,7 +53,13 @@ class DataDisplay extends Component {
     super(props);
     this.state = {
       render: null,
+      deleteReq: false, // Saved to only update if it changed
     };
+  }
+
+  componentDidUpdate() {
+    if (this.props.deleteReq !== this.state.deleteReq)
+      if (this.props.deleteReq) this.deleteHandler();
   }
 
   editHandler() {
@@ -66,29 +72,33 @@ class DataDisplay extends Component {
     // Guests cant delete an item
     if (this.props.account !== "guest") {
       // Call delete contract method and save tx to pending txs popup
-      this.props.contract.methods
-        .deleteObject(this.props.currentItem.id)
-        .send({ from: this.props.account })
-        .on(
-          "transactionHash",
-          function (hash) {
-            this.props.saveTx(hash);
-          }.bind(this)
-        );
+      try {
+        await this.props.contract.methods
+          .deleteObject(this.props.currentItem.id)
+          .send({ from: this.props.account })
+          .on(
+            "transactionHash",
+            function (hash) {
+              this.props.saveTx(hash);
+            }.bind(this)
+          );
 
-      let newItems = this.props.items;
-      let delPos;
+        let newItems = this.props.items;
+        let delPos;
 
-      // Delete previous item from state
-      for (let i = 0; i < this.props.items.length; i++)
-        if (this.props.items[i].numId === this.props.currentItem.numId)
-          delPos = i;
+        // Delete previous item from state
+        for (let i = 0; i < this.props.items.length; i++)
+          if (this.props.items[i].numId === this.props.currentItem.numId)
+            delPos = i;
 
-      newItems.splice(delPos, 1);
+        newItems.splice(delPos, 1);
 
-      // And save the edited one
-      this.props.saveItems(newItems);
-      this.props.changeItem(newItems[0]);
+        // And save the edited one
+        this.props.saveItems(newItems);
+        this.props.changeItem(newItems[0]);
+      } catch (e) {
+        console.log("User didn't approve transaction");
+      }
     } else {
       // Display err popup when guest tried to delete
       this.setState({

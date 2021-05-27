@@ -15,7 +15,7 @@ export default class ConnectAccount extends Component {
           />
           <div className="md:pb-7 w-full">
             <h1 className="font-black font-sans text-xl md:text-5xl mb-2 md:mb-5">
-              Hold on!
+              Connect a wallet
             </h1>
             <p className="leading-relaxed text-sm md:text-base">
               This application requires you to connect an Ethereum wallet. To

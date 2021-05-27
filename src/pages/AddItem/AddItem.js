@@ -14,6 +14,7 @@ import { encrypt } from "../../functions/encryption";
 import { changeItem, saveItems, saveTx } from "../../state/actions";
 import { formatItem, formatSend } from "../../functions/format";
 import { Redirect } from "react-router-dom";
+import { checkExtensionReq } from "../../functions/extensionInteractions";
 
 // IPFS Connection
 const { create } = require("ipfs-http-client");
@@ -47,6 +48,7 @@ class AddItem extends Component {
 
     this.state = {
       render: null,
+      type: null,
     };
 
     this.stateChanger = this.stateChanger.bind(this);
@@ -58,10 +60,12 @@ class AddItem extends Component {
     this.setState({ [name]: val });
   }
 
-  // Only create item if interface was provided
   componentWillMount() {
-    if (this.props.addingItem === null) {
+    // If no pre-declared type or query from extension > redirect
+    if (!(this.props.addingItem !== null)) {
       this.setState({ render: <Redirect to="/unlocked" /> });
+    } else {
+      this.setState({ type: this.props.addingItem });
     }
   }
 
@@ -122,16 +126,16 @@ class AddItem extends Component {
         <div className="flex flex-col relative bg-green-50 dark:bg-gray-900 w-full h-full justify-end items-center pb-24">
           <div className="flex flex-col justify-start items-center cursor-pointer w-2/3 h-5/6">
             <div className="overflow-y-auto w-full mb-10 border border-solid border-gray-400 dark:border-gray-200 p-8 rounded-xl">
-              {this.props.addingItem &&
-                Object.keys(IF[this.props.addingItem]).map((el, key) => {
+              {this.state.type &&
+                Object.keys(IF[this.state.type]).map((el, key) => {
                   // Displays the appropiate inputs for each field
                   return (
                     <AddDataField
                       key={key}
                       fieldLabel={el}
-                      fieldName={IF[this.props.addingItem][el][0]}
-                      fieldType={IF[this.props.addingItem][el][1]}
-                      elementType={this.props.addingItem}
+                      fieldName={IF[this.state.type][el][0]}
+                      fieldType={IF[this.state.type][el][1]}
+                      elementType={this.state.type}
                       stateChanger={this.stateChanger}
                     />
                   );

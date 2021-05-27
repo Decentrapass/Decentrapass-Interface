@@ -34,7 +34,7 @@ export default class GuestTriedAction extends Component {
           <div className="pb-7 w-full border-b border-solid border-gray-300 dark:border-gray-200">
             <h1 className="font-black font-sans w-5/6 text-2xl lg:text-4xl mb-5 text-red-500 flex items-center">
               <BiErrorCircle />
-              <span className="ml-3">Hey, you can't do that!</span>
+              <span className="ml-3">Sorry! You can't do that.</span>
             </h1>
             <p className="leading-relaxed">
               To interact with the application you need to connect an ethereum

@@ -10,15 +10,12 @@ An open source interface for the Decentrapass project - a project for decentrali
 
 ## Development
 
-Install dependencies
+Clone and install dependencies
 
 ```
-npm install
-```
-
-Run
-
-```
+git clone https://github.com/Decentrapass/Decentrapass-v1-Interface.git
+cd Decentrapass-v1-Interface/
+npm i
 npm run start
 ```
 

@@ -174,7 +174,7 @@ class App extends Component {
           <Route exact path="/unlocked">
             <Unlocked connect={this.connect} />
           </Route>
-          <Route exact path="/unlocked/addItem">
+          <Route exact path="/unlocked/add">
             <AddItem />
           </Route>
           <Route exact path="/unlocked/edit">

@@ -14,6 +14,7 @@ import GuestTriedAction from "../../components/Popups/GuestTriedAction";
 // Constants
 import { IF } from "../../components/Constants/AddInterfaces";
 import { TYPES_INT } from "../../components/Constants/constants";
+import { checkExtensionReq } from "../../functions/extensionInteractions";
 
 // IPFS Connection
 const { create } = require("ipfs-http-client");
@@ -55,6 +56,14 @@ class EditItem extends Component {
 
   // Displays right fields filled with previous data
   componentDidMount() {
+    console.log(this.props.currentItem);
+
+    // If no pre-declared type or query from extension > redirect
+    if (this.props.currentItem === null) {
+      this.setState({ render: <Redirect to="/unlocked" /> });
+      return;
+    }
+
     var fields = IF[this.props.currentItem.type];
     var fieldsHtml = Object.keys(fields).map((el) => {
       return (
