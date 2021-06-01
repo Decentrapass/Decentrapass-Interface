@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/Decentrapass-v1-Interface/static/css/main.28566732.chunk.css",
-    "main.js": "/Decentrapass-v1-Interface/static/js/main.0d7d68af.chunk.js",
-    "main.js.map": "/Decentrapass-v1-Interface/static/js/main.0d7d68af.chunk.js.map",
-    "runtime-main.js": "/Decentrapass-v1-Interface/static/js/runtime-main.7b51c630.js",
-    "runtime-main.js.map": "/Decentrapass-v1-Interface/static/js/runtime-main.7b51c630.js.map",
-    "static/js/2.a67990fc.chunk.js": "/Decentrapass-v1-Interface/static/js/2.a67990fc.chunk.js",
-    "static/js/2.a67990fc.chunk.js.map": "/Decentrapass-v1-Interface/static/js/2.a67990fc.chunk.js.map",
-    "index.html": "/Decentrapass-v1-Interface/index.html",
-    "static/css/main.28566732.chunk.css.map": "/Decentrapass-v1-Interface/static/css/main.28566732.chunk.css.map",
-    "static/js/2.a67990fc.chunk.js.LICENSE.txt": "/Decentrapass-v1-Interface/static/js/2.a67990fc.chunk.js.LICENSE.txt",
-    "static/media/MetamaskAccept.ea4758d3.png": "/Decentrapass-v1-Interface/static/media/MetamaskAccept.ea4758d3.png",
-    "static/media/MetamaskInterface.f5bbca72.jpg": "/Decentrapass-v1-Interface/static/media/MetamaskInterface.f5bbca72.jpg",
-    "static/media/MetamaskRegister.b3aec296.png": "/Decentrapass-v1-Interface/static/media/MetamaskRegister.b3aec296.png",
-    "static/media/logo-nobg.e9bbf6ca.png": "/Decentrapass-v1-Interface/static/media/logo-nobg.e9bbf6ca.png"
+    "main.css": "/static/css/main.28566732.chunk.css",
+    "main.js": "/static/js/main.4a1add10.chunk.js",
+    "main.js.map": "/static/js/main.4a1add10.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.dae112f6.js",
+    "runtime-main.js.map": "/static/js/runtime-main.dae112f6.js.map",
+    "static/js/2.099d1097.chunk.js": "/static/js/2.099d1097.chunk.js",
+    "static/js/2.099d1097.chunk.js.map": "/static/js/2.099d1097.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.28566732.chunk.css.map": "/static/css/main.28566732.chunk.css.map",
+    "static/js/2.099d1097.chunk.js.LICENSE.txt": "/static/js/2.099d1097.chunk.js.LICENSE.txt",
+    "static/media/MetamaskAccept.ea4758d3.png": "/static/media/MetamaskAccept.ea4758d3.png",
+    "static/media/MetamaskInterface.f5bbca72.jpg": "/static/media/MetamaskInterface.f5bbca72.jpg",
+    "static/media/MetamaskRegister.b3aec296.png": "/static/media/MetamaskRegister.b3aec296.png",
+    "static/media/logo-nobg.e9bbf6ca.png": "/static/media/logo-nobg.e9bbf6ca.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.7b51c630.js",
-    "static/js/2.a67990fc.chunk.js",
+    "static/js/runtime-main.dae112f6.js",
+    "static/js/2.099d1097.chunk.js",
     "static/css/main.28566732.chunk.css",
-    "static/js/main.0d7d68af.chunk.js"
+    "static/js/main.4a1add10.chunk.js"
   ]
 }
