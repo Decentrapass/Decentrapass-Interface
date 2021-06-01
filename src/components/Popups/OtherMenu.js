@@ -20,14 +20,14 @@ export default class OtherMenu extends Component {
         ref={this.props.innerRef}
       >
         <a
-          href="https://decentrapass.github.io/Decentrapass-org/"
+          href="https://decentrapass.org"
           className="w-full p-4 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-white flex items-center justify-start"
         >
           <AiOutlineInfoCircle />
           <span className="ml-2">About</span>
         </a>
         <a
-          href="https://decentrapass.github.io/Decentrapass-v1-docs/"
+          href="https://docs.decentrapass.org"
           className="w-full p-4 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-white flex items-center justify-start"
         >
           <HiOutlineBookOpen />

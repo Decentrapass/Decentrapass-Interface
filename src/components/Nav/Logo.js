@@ -6,7 +6,7 @@ import LOGO from "../../img/logo-nobg.png";
 export default function Logo() {
   return (
     <a
-      href="https://decentrapass.github.io/Decentrapass-org/"
+      href="https://decentrapass.org"
       className="flex h-full items-center dark:text-white"
     >
       <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
