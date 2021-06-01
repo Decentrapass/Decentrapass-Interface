@@ -2,9 +2,9 @@
 
 An open source interface for the Decentrapass project - a project for decentralized password storing and managing.
 
-- Website: [decentrapass.com](decentrapass.com)
-- Application: [decentrapass.com/app](decentrapass.com/app)
-- Docs: [decentrapass.com/docs](decentrapass.com/docs)
+- Website: [decentrapass.org](http://decentrapass.org)
+- Application: [app.decentrapass.org](http://app.decentrapass.org)
+- Docs: [docs.decentrapass.com](http://docs.decentrapass.org)
 - Twitter: [@decentrapass](https://twitter.com/decentrapass)
 - Email: decentrapass@protonmail.com
 
