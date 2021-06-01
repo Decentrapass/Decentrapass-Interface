@@ -9,7 +9,7 @@ import { SHOW_SEARCH } from "../../../components/Constants/constants";
 // Components
 import SearchItem from "./SearchItem";
 import AddItemButton from "../../../components/Popups/AddItemButton";
-import SearchBar from "../../../components/Search/SearchBar";
+import SearchBar from "../SearchBar";
 
 const mapStateToProps = (state) => {
   return { displayedItems: state.displayedItems };
@@ -19,18 +19,18 @@ class Recommended extends Component {
   render() {
     return (
       <div
-        className="flex flex-col w-full h-full absolute md:static md:w-1/4 border-r-2 border-solid border-gray-400 dark:bg-gray-800 transition-transform"
+        className="flex flex-col w-full h-full absolute md:static md:w-1/4 border-r-2 border-solid border-green-600 dark:border-gray-400 dark:bg-gray-800 transition-transform"
         style={
           !this.props.show
             ? { transform: "translateX(-100%)" }
             : { transform: "translateX(0)" }
         }
       >
-        <div className="flex w-full h-12 lg:h-16">
+        <div className="flex w-full h-12 lg:h-16 px-2 border-b-2 border-solid border-green-600 dark:border-gray-400">
           <SearchBar />
           <AddItemButton />
         </div>
-        <div className="w-full h-full cursor-pointer overflow-y-scroll pt-3">
+        <div className="w-full h-full cursor-pointer overflow-y-auto pt-3">
           {this.props.displayedItems.map((item, key) => {
             // Choosing the most relevant info to show in the recommended section
             let chosenKey = "";

@@ -61,7 +61,7 @@ class SearchItem extends Component {
           "p-2 flex " +
           (this.props.currentItem &&
           this.props.currentItem.numId === this.props.itemId
-            ? "bg-white dark:bg-gray-700"
+            ? "bg-white dark:bg-gray-700 z-10 shadow-2xl"
             : "")
         }
         onClick={this.handleClick}

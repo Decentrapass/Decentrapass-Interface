@@ -20,6 +20,7 @@ import {
 import { decrypt } from "../../functions/encryption";
 import { formatData } from "../../functions/format";
 import { checkExtensionReq } from "../../functions/extensionInteractions";
+import { GUEST_DATA } from "../Login/GuestExamples";
 
 const mapStateToProps = (state) => {
   return {
@@ -65,6 +66,7 @@ class Unlocked extends Component {
     if (
       !this.props.loggedIn &&
       getCookie("SESSION").length > 0 &&
+      getCookie("SESSION").split(",")[0] !== "guest" &&
       !this.state.contract &&
       this.props.contract
     ) {
@@ -102,6 +104,19 @@ class Unlocked extends Component {
       if (query) this.handleExtensionQueries(query);
 
       this.props.loading(false);
+    } else if (
+      !this.props.loggedIn &&
+      getCookie("SESSION").length > 0 &&
+      !this.state.contract &&
+      this.props.contract
+    ) {
+      let dataToSave = GUEST_DATA;
+      let passSave = getCookie("SESSION").split(",")[0];
+      this.props.saveItems(dataToSave);
+      this.props.changeItem(dataToSave[0]);
+      this.props.saveLogin(true);
+      this.props.loading(false);
+      this.props.savePassword(passSave);
     }
   }
 

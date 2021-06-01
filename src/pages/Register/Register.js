@@ -192,7 +192,7 @@ export class Register extends Component {
                   id="rememberMeReg"
                 />
                 <label htmlFor="rememberMeReg" className="cursor-pointer">
-                  Keep me logged in for 1h
+                  Remember me
                 </label>
               </div>
               <button

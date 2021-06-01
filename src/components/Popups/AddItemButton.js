@@ -75,12 +75,12 @@ class AddItemButton extends Component {
 
   render() {
     return (
-      <div className="h-full flex items-center justify-center">
+      <div className="h-full flex items-center justify-center relative">
         {this.state.redirect}
 
         {/* Add item button */}
         <button
-          className="hover:bg-gray-300 dark:hover:bg-gray-900 border-b-2 bg-green-50 dark:bg-gray-800 border-gray-400 px-2 lg:px-4 py-2 text-gray-600 dark:text-gray-500 text-3xl focus:outline-none w-full h-full"
+          className="w-12 h-12 text-3xl text-gray-500 rounded-full bg-green-50 dark:bg-gray-800 border border-gray-400 dark:border-gray-700 transform hover:scale-105 focus:scale-105 transition-all flex items-center justify-center focus:bg-white dark:focus:bg-gray-900 outline-none hover:outline-none focus:outline-none focus:text-gray-700 dark:focus:text-white focus:border-gray-400 dark:focus:border-white hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white"
           onClick={() => this.setState({ open: true })}
         >
           <IoMdAdd />
@@ -88,7 +88,7 @@ class AddItemButton extends Component {
 
         {/* Add item popup */}
         <div
-          className="padding-3 bg-white dark:bg-gray-900 text-gray-800 dark:text-white border-2 rounded-xl rounded-tr-none border-gray-300 dark:border-gray-500 border-solid overflow-hidden w-64 absolute right-0 top-12 lg:top-16"
+          className="padding-3 bg-white dark:bg-gray-900 text-gray-800 dark:text-white border-2 rounded-xl rounded-tr-none border-gray-300 dark:border-gray-500 border-solid overflow-hidden w-64 absolute right-0 top-full"
           style={this.state.open ? { display: "block" } : { display: "none" }}
           ref={this.wrapperRef}
         >

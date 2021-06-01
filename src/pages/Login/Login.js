@@ -261,7 +261,7 @@ export class Login extends Component {
                   id="rememberMe"
                 />
                 <label htmlFor="rememberMe" className="cursor-pointer">
-                  Keep me logged in for 1h
+                  Remember me
                 </label>
               </div>
               {this.state.wrongPass && (

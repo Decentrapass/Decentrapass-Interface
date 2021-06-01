@@ -123,7 +123,7 @@ class Nav extends Component {
             />
           )
         }
-        <div className="flex items-center justify-between w-full px-8 py-5 border-b-2 border-solid border-green-700 dark:border-white">
+        <div className="flex items-center justify-between w-full px-8 py-5 border-b-2 border-solid border-green-600 dark:border-white">
           <Logo />
           <div className="flex h-8 lg:h-10">
             {/* We dont display network in mobile */}
