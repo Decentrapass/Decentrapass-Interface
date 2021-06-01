@@ -28,11 +28,15 @@ class AccountButton extends Component {
             {this.props.pendingTxs.length}
           </div>
         )}
-        <div className="text-lg lg:text-xl h-full w-full text-gray-900 dark:text-gray-200 font-mono flex items-center">
+        <div className="text-lg lg:text-xl h-full w-full text-gray-900 dark:text-gray-200 flex items-center">
           {window.innerWidth > 768 ? (
-            <span>Account: {formatAccount(this.props.account, 4)}</span>
+            <span className="font-mono">
+              Account: {formatAccount(this.props.account, 4)}
+            </span>
           ) : (
-            <span>{formatAccount(this.props.account, 4)}</span>
+            <span className="font-mono">
+              {formatAccount(this.props.account, 4)}
+            </span>
           )}
           <Jazzicon account={this.props.account} addedClasses="ml-3" />
         </div>

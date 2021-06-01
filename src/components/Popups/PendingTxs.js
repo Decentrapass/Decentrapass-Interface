@@ -105,7 +105,9 @@ class PendingTxs extends Component {
           <div className="flex flex-col border border-solid border-gray-500 rounded-xl p-3 my-5 mx-5">
             <div className="flex justify-between items-center mb-3">
               <div className="text-xl flex items-center">
-                <span>{formatAccount(this.props.account, 4)}</span>
+                <span className="font-mono">
+                  {formatAccount(this.props.account, 4)}
+                </span>
                 <Jazzicon account={this.props.account} addedClasses="ml-3" />
               </div>
               <button
