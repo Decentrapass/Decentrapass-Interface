@@ -31,6 +31,7 @@ const mapStateToProps = (state) => {
     contract: state.contract,
     items: state.items,
     password: state.password,
+    pendingTxs: state.pendingTxs,
   };
 };
 
@@ -105,7 +106,22 @@ class AddItem extends Component {
           "transactionHash",
           function (hash) {
             // Save txs to pending txs menu
-            this.props.saveTx(hash);
+            this.props.saveTx([...this.props.pendingTxs, hash]);
+          }.bind(this)
+        )
+        .on(
+          "receipt",
+          function (receipt) {
+            // Remove tx from pending txs list
+            let copyTxs = [...this.props.pendingTxs];
+
+            for (const i in copyTxs) {
+              if (copyTxs[i] === receipt.transactionHash) {
+                copyTxs.splice(i, 1);
+                break;
+              }
+            }
+            this.props.saveTx(copyTxs);
           }.bind(this)
         );
       this.setState({ render: <Redirect to="/unlocked" /> });
@@ -125,7 +141,7 @@ class AddItem extends Component {
         {this.state.render}
         <div className="flex flex-col relative bg-green-50 dark:bg-gray-900 w-full h-full justify-end items-center pb-24">
           <div className="flex flex-col justify-start items-center cursor-pointer w-2/3 h-5/6">
-            <div className="overflow-y-auto w-full mb-10 border border-solid border-gray-400 dark:border-gray-200 p-8 rounded-xl">
+            <div className="overflow-y-auto w-full mb-10 border border-solid border-gray-400 dark:border-gray-200 p-8">
               {this.state.type &&
                 Object.keys(IF[this.state.type]).map((el, key) => {
                   // Displays the appropiate inputs for each field

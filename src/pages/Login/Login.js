@@ -211,7 +211,7 @@ export class Login extends Component {
                 </div>
                 <div className="flex lg:flex-col items-end text-base md:text-sm">
                   <a
-                    href={"https://etherscan.io/address/" + this.props.account}
+                    href={"https://ropsten.etherscan.io/address/" + this.props.account}
                     className="text-gray-500 dark:text-gray-400 hover:underline flex mx-2 md:mx-0 md:mb-2 items-center gap-1"
                     target="_blank"
                     rel="noreferrer"

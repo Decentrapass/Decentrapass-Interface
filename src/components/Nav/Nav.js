@@ -128,7 +128,7 @@ class Nav extends Component {
           <div className="flex h-8 lg:h-10">
             {/* We dont display network in mobile */}
             <div
-              className="text-lg lg:text-xl bg-green-800 text-green-300 rounded px-4 font-mono capitalize items-center hidden lg:block"
+              className="text-lg lg:text-xl bg-green-800 text-green-300 rounded px-4 font-mono capitalize items-center hidden lg:block mr-1"
               style={
                 this.state.network.length > 0 && window.innerWidth > 768
                   ? { display: "flex" }

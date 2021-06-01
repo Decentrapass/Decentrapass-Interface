@@ -35,6 +35,7 @@ const mapStateToProps = (state) => {
     account: state.account,
     displayedItems: state.displayedItems,
     currentItem: state.currentItem,
+    pendingTxs: state.pendingTxs,
   };
 };
 
@@ -79,7 +80,23 @@ class DataDisplay extends Component {
           .on(
             "transactionHash",
             function (hash) {
-              this.props.saveTx(hash);
+              // Save txs to pending txs menu
+              this.props.saveTx([...this.props.pendingTxs, hash]);
+            }.bind(this)
+          )
+          .on(
+            "receipt",
+            function (receipt) {
+              // Remove tx from pending txs list
+              let copyTxs = [...this.props.pendingTxs];
+
+              for (const i in copyTxs) {
+                if (copyTxs[i] === receipt.transactionHash) {
+                  copyTxs.splice(i, 1);
+                  break;
+                }
+              }
+              this.props.saveTx(copyTxs);
             }.bind(this)
           );
 

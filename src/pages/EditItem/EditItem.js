@@ -31,6 +31,7 @@ const mapStateToProps = (state) => {
     password: state.password,
     contract: state.contract,
     account: state.account,
+    pendingTxs: state.pendingTxs,
   };
 };
 
@@ -124,7 +125,23 @@ class EditItem extends Component {
         .on(
           "transactionHash",
           function (hash) {
-            this.props.saveTx(hash);
+            // Save txs to pending txs menu
+            this.props.saveTx([...this.props.pendingTxs, hash]);
+          }.bind(this)
+        )
+        .on(
+          "receipt",
+          function (receipt) {
+            // Remove tx from pending txs list
+            let copyTxs = [...this.props.pendingTxs];
+
+            for (const i in copyTxs) {
+              if (copyTxs[i] === receipt.transactionHash) {
+                copyTxs.splice(i, 1);
+                break;
+              }
+            }
+            this.props.saveTx(copyTxs);
           }.bind(this)
         );
 
@@ -145,7 +162,7 @@ class EditItem extends Component {
         {this.state.render}
         <div className="flex flex-col relative bg-green-50 dark:bg-gray-900 w-full h-full justify-end items-center pb-24">
           <div className="flex flex-col justify-start items-center cursor-pointer w-2/3 h-5/6">
-            <div className="overflow-y-auto w-full mb-10 border border-solid border-gray-400 dark:border-gray-200 p-8 rounded-xl">
+            <div className="overflow-y-auto w-full mb-10 border border-solid border-gray-400 dark:border-gray-200 p-8">
               {this.state.fields}
             </div>
             <div className="flex w-full justify-between dark:text-white">

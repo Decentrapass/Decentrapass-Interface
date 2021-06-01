@@ -20,6 +20,7 @@ const mapStateToProps = (state) => {
   return {
     contract: state.contract,
     account: state.account,
+    pendingTxs: state.pendingTxs,
   };
 };
 
@@ -78,7 +79,23 @@ export class Register extends Component {
       .on(
         "transactionHash",
         function (hash) {
-          this.props.saveTx(hash);
+          // Save txs to pending txs menu
+          this.props.saveTx([...this.props.pendingTxs, hash]);
+        }.bind(this)
+      )
+      .on(
+        "receipt",
+        function (receipt) {
+          // Remove tx from pending txs list
+          let copyTxs = [...this.props.pendingTxs];
+
+          for (const i in copyTxs) {
+            if (copyTxs[i] === receipt.transactionHash) {
+              copyTxs.splice(i, 1);
+              break;
+            }
+          }
+          this.props.saveTx(copyTxs);
         }.bind(this)
       );
 
@@ -149,7 +166,10 @@ export class Register extends Component {
                 </div>
                 <div className="flex lg:flex-col items-end text-base md:text-sm">
                   <a
-                    href={"https://etherscan.io/address/" + this.props.account}
+                    href={
+                      "https://ropsten.etherscan.io/address/" +
+                      this.props.account
+                    }
                     className="text-gray-500 dark:text-gray-400 hover:underline flex mx-2 md:mx-0 md:mb-2 items-center gap-1"
                     target="_blank"
                     rel="noreferrer"

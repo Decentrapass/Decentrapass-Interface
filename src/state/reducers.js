@@ -82,7 +82,7 @@ const rootReducer = (state = initialState, action) => {
     case SAVE_TX:
       return {
         ...state,
-        pendingTxs: [...state.pendingTxs, action.payload],
+        pendingTxs: action.payload,
       };
     default:
       return state;

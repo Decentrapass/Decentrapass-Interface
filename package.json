@@ -32,7 +32,6 @@
     "test": "craco test",
     "predeploy": "craco build",
     "deploy": "gh-pages -d build",
-    "build:extension": "node ./scripts/build-non-split.js && npm run build:clean",
     "build:clean": "cd build && mv static/js/*.js main.js && mv static/css/*.css main.css && rm -r static",
     "eject": "react-scripts eject"
   },

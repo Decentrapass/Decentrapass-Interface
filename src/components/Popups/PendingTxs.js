@@ -117,7 +117,9 @@ class PendingTxs extends Component {
             </div>
             <div className="flex">
               <a
-                href={"https://etherscan.io/address/" + this.props.account}
+                href={
+                  "https://ropsten.etherscan.io/address/" + this.props.account
+                }
                 className="text-gray-500 hover:underline flex mr-3 items-center gap-1"
                 target="_blank"
                 rel="noreferrer"
