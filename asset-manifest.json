@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.5f933cc9.chunk.css",
-    "main.js": "/static/js/main.7d2c7cb9.chunk.js",
-    "main.js.map": "/static/js/main.7d2c7cb9.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.dae112f6.js",
-    "runtime-main.js.map": "/static/js/runtime-main.dae112f6.js.map",
-    "static/js/2.16f27bbe.chunk.js": "/static/js/2.16f27bbe.chunk.js",
-    "static/js/2.16f27bbe.chunk.js.map": "/static/js/2.16f27bbe.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.5f933cc9.chunk.css.map": "/static/css/main.5f933cc9.chunk.css.map",
-    "static/js/2.16f27bbe.chunk.js.LICENSE.txt": "/static/js/2.16f27bbe.chunk.js.LICENSE.txt",
-    "static/media/MetamaskAccept.ea4758d3.png": "/static/media/MetamaskAccept.ea4758d3.png",
-    "static/media/MetamaskInterface.f5bbca72.jpg": "/static/media/MetamaskInterface.f5bbca72.jpg",
-    "static/media/MetamaskRegister.b3aec296.png": "/static/media/MetamaskRegister.b3aec296.png",
-    "static/media/logo-nobg.e9bbf6ca.png": "/static/media/logo-nobg.e9bbf6ca.png"
+    "main.css": "/Decentrapass-v1-Interface/static/css/main.5f933cc9.chunk.css",
+    "main.js": "/Decentrapass-v1-Interface/static/js/main.7d2c7cb9.chunk.js",
+    "main.js.map": "/Decentrapass-v1-Interface/static/js/main.7d2c7cb9.chunk.js.map",
+    "runtime-main.js": "/Decentrapass-v1-Interface/static/js/runtime-main.dae112f6.js",
+    "runtime-main.js.map": "/Decentrapass-v1-Interface/static/js/runtime-main.dae112f6.js.map",
+    "static/js/2.16f27bbe.chunk.js": "/Decentrapass-v1-Interface/static/js/2.16f27bbe.chunk.js",
+    "static/js/2.16f27bbe.chunk.js.map": "/Decentrapass-v1-Interface/static/js/2.16f27bbe.chunk.js.map",
+    "index.html": "/Decentrapass-v1-Interface/index.html",
+    "static/css/main.5f933cc9.chunk.css.map": "/Decentrapass-v1-Interface/static/css/main.5f933cc9.chunk.css.map",
+    "static/js/2.16f27bbe.chunk.js.LICENSE.txt": "/Decentrapass-v1-Interface/static/js/2.16f27bbe.chunk.js.LICENSE.txt",
+    "static/media/MetamaskAccept.ea4758d3.png": "/Decentrapass-v1-Interface/static/media/MetamaskAccept.ea4758d3.png",
+    "static/media/MetamaskInterface.f5bbca72.jpg": "/Decentrapass-v1-Interface/static/media/MetamaskInterface.f5bbca72.jpg",
+    "static/media/MetamaskRegister.b3aec296.png": "/Decentrapass-v1-Interface/static/media/MetamaskRegister.b3aec296.png",
+    "static/media/logo-nobg.e9bbf6ca.png": "/Decentrapass-v1-Interface/static/media/logo-nobg.e9bbf6ca.png"
   },
   "entrypoints": [
     "static/js/runtime-main.dae112f6.js",
